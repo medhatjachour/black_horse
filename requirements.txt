@@ -1,0 +1,10 @@
+PySide6
+SQLAlchemy
+pydantic 
+passlib 
+https://build-system.fman.io/pro/6aa8d2cc-e7d1-432a-afee-2546a35d80eb/latest#egg=fbs
+python-multipart
+PyJWT
+google-api-python-client
+google-auth-oauthlib
+wmi
