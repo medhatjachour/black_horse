@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainJAUvmQ.ui'
+## Form generated from reading UI file 'mainwGfEpy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -580,7 +580,8 @@ class Ui_MainWindow(object):
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setMaximumSize(QSize(16777215, 80))
         self.frame_9.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius:8px;")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QFrame.Raised)
         self.gridLayout_3 = QGridLayout(self.frame_9)
@@ -898,6 +899,7 @@ class Ui_MainWindow(object):
         self.frame_11.setMaximumSize(QSize(16777215, 100))
         self.frame_11.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
+"border-radius:8px;\n"
 "")
         self.frame_11.setFrameShape(QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QFrame.Raised)
@@ -1038,7 +1040,8 @@ class Ui_MainWindow(object):
         self.frame_14.setObjectName(u"frame_14")
         self.frame_14.setMinimumSize(QSize(0, 99))
         self.frame_14.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius:8px;")
         self.frame_14.setFrameShape(QFrame.StyledPanel)
         self.frame_14.setFrameShadow(QFrame.Raised)
         self.gridLayout_5 = QGridLayout(self.frame_14)
@@ -1382,7 +1385,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1023, 634))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
@@ -1400,7 +1403,8 @@ class Ui_MainWindow(object):
         self.frame_16.setObjectName(u"frame_16")
         self.frame_16.setMinimumSize(QSize(0, 100))
         self.frame_16.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius:8px;")
         self.frame_16.setFrameShape(QFrame.StyledPanel)
         self.frame_16.setFrameShadow(QFrame.Raised)
         self.gridLayout_9 = QGridLayout(self.frame_16)
@@ -1583,7 +1587,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 1025, 656))
         self.verticalLayout_14 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_14.setSpacing(6)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
@@ -2171,6 +2175,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_31.setContentsMargins(0, 0, 0, 0)
         self.frame_73 = QFrame(self.frame_72)
         self.frame_73.setObjectName(u"frame_73")
+        self.frame_73.setStyleSheet(u"\n"
+"border-radius:8px;")
         self.frame_73.setFrameShape(QFrame.StyledPanel)
         self.frame_73.setFrameShadow(QFrame.Raised)
         self.verticalLayout_36 = QVBoxLayout(self.frame_73)
@@ -2227,6 +2233,8 @@ class Ui_MainWindow(object):
         font8 = QFont()
         font8.setPointSize(9)
         self.frame_52.setFont(font8)
+        self.frame_52.setStyleSheet(u"\n"
+"border-radius:8px;")
         self.frame_52.setFrameShape(QFrame.StyledPanel)
         self.frame_52.setFrameShadow(QFrame.Raised)
         self.verticalLayout_33 = QVBoxLayout(self.frame_52)
@@ -2377,6 +2385,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_32.setContentsMargins(0, 0, 0, 0)
         self.frame_75 = QFrame(self.frame_74)
         self.frame_75.setObjectName(u"frame_75")
+        self.frame_75.setStyleSheet(u"\n"
+"border-radius:8px;")
         self.frame_75.setFrameShape(QFrame.StyledPanel)
         self.frame_75.setFrameShadow(QFrame.Raised)
         self.verticalLayout_39 = QVBoxLayout(self.frame_75)
@@ -2428,6 +2438,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_38.setContentsMargins(0, 0, 0, 0)
         self.frame_85 = QFrame(self.frame_84)
         self.frame_85.setObjectName(u"frame_85")
+        self.frame_85.setStyleSheet(u"\n"
+"border-radius:8px;")
         self.frame_85.setFrameShape(QFrame.StyledPanel)
         self.frame_85.setFrameShadow(QFrame.Raised)
         self.verticalLayout_40 = QVBoxLayout(self.frame_85)

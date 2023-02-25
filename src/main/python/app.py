@@ -35,11 +35,24 @@ class MainWindow(QMainWindow):
         self.namingSearch = False
         self.threadpool = QThreadPool()
 
+        from widgets.TreeWidget.ui_tree import PY_TreeWidget
+        self.tree = PY_TreeWidget(
+            1,
+            {"first":{"f1":"se",
+                 "f12":{"se":"third level","s2":"third level2","s3":"third level3",}
+                , "f3":"se",},
+             "second":{"f23":"se",
+                 "f22":{"se":"third level","se":"third level","se":"third level",}
+                 },
+             "third":{"f33":"se3"}
+            }
+        )
+        self.ui.verticalLayout_12.addWidget(self.tree)
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.ui.frame_8.setVisible(False)
         self.rightFrame = False
         self.isAdmin = False
-        self.ui.stackedWidget.setCurrentIndex(0)
+        self.ui.stackedWidget.setCurrentIndex(1)
         self.ui.stackedWidget_2.setCurrentIndex(0)
         # validation for lineEdits
         only_num_specify = QRegularExpression("[0-9]{15}")
