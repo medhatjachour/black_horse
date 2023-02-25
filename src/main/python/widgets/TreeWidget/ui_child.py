@@ -96,7 +96,6 @@ class PY_TreeChild(QFrame):
             self.setStyleSheet("padding-left:25px;\n")
             self.pushButton_2.setText(str(self._data))
             self.pushButton.setText(str(self._data_b))
-            print("""""""self._data""""""")
         if type == 2:
             self.setStyleSheet("padding-left:50px;\n")
         if type == 0:
@@ -105,7 +104,10 @@ class PY_TreeChild(QFrame):
         self.pushButton_3.clicked.connect(self.checkIt)
         self.pushButton_2.clicked.connect(self.checkIt)
         self.pushButton.clicked.connect(self.checkIt)
+    def isActivated(self):
+        return self.isChecked
     def checkIt(self):
+        
         if self.isChecked:
             self.setStyleSheet("padding-left:50px;\n")
             self.frame.setStyleSheet(u"QFrame{\n"
@@ -119,7 +121,7 @@ class PY_TreeChild(QFrame):
                 "}\n"
                 )
         else:
-            
+
             self.setStyleSheet("padding-left:0px;\n")
             self.frame.setStyleSheet(u"QFrame{\n"
                 "border:2px solid transparent;\n"

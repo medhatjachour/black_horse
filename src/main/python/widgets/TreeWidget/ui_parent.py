@@ -85,17 +85,37 @@ class PY_TreeParent(QFrame):
         self.pushButton.clicked.connect(self.showChild)
         self.pushButton_2.clicked.connect(self.showChild)
         self.childs = []
+        self.keysCh = []
         self.showChild()
     # /////////////////////////////////////////////////////////// clearing taps
 
     def clear_tab_except_first(self, layout):
-        for i in range(layout.count() - 1):
-            child = layout.takeAt(1)
-            if child.widget():
-                child.widget().deleteLater()
-        self.childs = []
-        
+        # for i in range(layout.count() - 1):
+        #     child = layout.takeAt(1)
+        #     if child.widget():
+        #         child.widget().deleteLater()
+        # self.childs = []
+        for i in self.childs:
+            if type(i) == PY_TreeChild:
+               if i.isActivated():
+                   pass
+               else:
+                    self.verticalLayout.removeWidget(i)
+                    i.setVisible(False)
+                    i.setParent(None)
+                    self.childs.remove(i)
+                #    i.setVisible(False)
+            else:
+                self.verticalLayout.removeWidget(i)
+                i.setVisible(False)
+                i.setParent(None)
+                self.childs.remove(i)
+        print(self.childs)
+
     # /////////////////////////////////////////////////////////// clearing taps
+
+    def removeFromChilds(self):
+        self.childs.remove()
 
     def showChild(self):
         self.clear_tab_except_first(self.verticalLayout)
@@ -103,9 +123,12 @@ class PY_TreeParent(QFrame):
             for i in self._data[self.theKey]:
                 if type(self._data[self.theKey][i]) == str:
                     self.child = PY_TreeChild(i,self._data[self.theKey][i],1)
-                    # self.child = PY_TreeChild(self._data[self.theKey],1)
-                    self.childs.append(self.child)
-                    self.verticalLayout.addWidget(self.child)
+                    if self.child in self.childs: 
+                        print("already in")
+                    else:                 
+                        self.childs.append(self.child)
+                        self.verticalLayout.addWidget(self.child)
+
                 elif type(self._data[self.theKey][i]) == dict:
                     self.child = PY_TreeParent2(1,self._data)
                     self.childs.append(self.child)
