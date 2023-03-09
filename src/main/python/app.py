@@ -35,24 +35,12 @@ class MainWindow(QMainWindow):
         self.namingSearch = False
         self.threadpool = QThreadPool()
 
-        from widgets.TreeWidget.ui_tree import PY_TreeWidget
-        self.tree = PY_TreeWidget(
-            1,
-            {"first":{"f1":"se",
-                 "f12":{"se":"third level","s2":"third level2","s3":"third level3",}
-                , "f3":"se",},
-             "second":{"f23":"se",
-                 "f22":{"se":"third level","se":"third level","se":"third level",}
-                 },
-             "third":{"f33":"se3"}
-            }
-        )
-        self.ui.verticalLayout_12.addWidget(self.tree)
+        
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.ui.frame_8.setVisible(False)
         self.rightFrame = False
         self.isAdmin = False
-        self.ui.stackedWidget.setCurrentIndex(1)
+        self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.stackedWidget_2.setCurrentIndex(0)
         # validation for lineEdits
         only_num_specify = QRegularExpression("[0-9]{15}")
@@ -109,8 +97,8 @@ class MainWindow(QMainWindow):
         self.showTotal = 0
         self.ui.final_price.setText(str(self.showTotal))
 
-        self.ui.color_sell.currentIndexChanged.connect(self.chose_size_sale)
-        self.ui.size_sell.currentIndexChanged.connect(self.chose_color_sale)
+        self.ui.color_sell.currentIndexChanged.connect(self.chose_color_sale)
+        self.ui.size_sell.currentIndexChanged.connect(self.chose_size_sale)
         self.ui.addToCart.clicked.connect(self.addItemSale)
         self.ui.done_sell.clicked.connect(self.doneSellCart)
         # store
@@ -361,22 +349,6 @@ class MainWindow(QMainWindow):
         product = self.ui.procut_sell.text()
         the_products = _services.get_products_by_name(_database.SessionLocal(), product)
         if the_products:
-            sizes = []
-            self.ui.color_sell.addItem("")
-            for i in the_products:
-                if i.size in sizes:
-                    pass
-                else:
-                    sizes.append(i.size)
-            for x in sizes:
-                self.ui.color_sell.addItem(x)
-
-    def chose_size_sale(self):
-        self.ui.size_sell.clear()
-        name = self.ui.procut_sell.text()
-        size = self.ui.color_sell.currentText()
-        the_products = _services.get_products_by_name_and_size(_database.SessionLocal(), name, size)
-        if the_products:
             colors = []
             self.ui.size_sell.addItem("")
             for i in the_products:
@@ -386,6 +358,22 @@ class MainWindow(QMainWindow):
                     colors.append(i.color)
             for x in colors:
                 self.ui.size_sell.addItem(x)
+
+    def chose_size_sale(self):
+        self.ui.color_sell.clear()
+        name = self.ui.procut_sell.text()
+        color = self.ui.size_sell.currentText()
+        the_products = _services.get_products_by_name_and_color(_database.SessionLocal(), name, color)
+        if the_products:
+            sizes = []
+            self.ui.color_sell.addItem("")
+            for i in the_products:
+                if i.size in sizes:
+                    pass
+                else:
+                    sizes.append(i.size)
+            for x in sizes:
+                self.ui.color_sell.addItem(x)
 
     def chose_color_sale(self):
         name = self.ui.procut_sell.text()

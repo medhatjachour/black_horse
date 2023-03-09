@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1293</width>
-    <height>887</height>
+    <height>892</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1264,18 +1264,12 @@ color: rgb(0, 0, 0);</string>
                      <enum>QFrame::Raised</enum>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_3">
-                     <item row="1" column="5">
-                      <widget class="QComboBox" name="color_sell">
-                       <property name="minimumSize">
-                        <size>
-                         <width>100</width>
-                         <height>40</height>
-                        </size>
-                       </property>
+                     <item row="0" column="8">
+                      <widget class="QLabel" name="label_10">
                        <property name="maximumSize">
                         <size>
-                         <width>200</width>
-                         <height>16777215</height>
+                         <width>16777215</width>
+                         <height>25</height>
                         </size>
                        </property>
                        <property name="font">
@@ -1283,50 +1277,22 @@ color: rgb(0, 0, 0);</string>
                          <pointsize>11</pointsize>
                         </font>
                        </property>
-                       <property name="cursor">
-                        <cursorShape>PointingHandCursor</cursorShape>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">QComboBox{
-	border: 1px solid #ced4da;
-	border-radius:4px;
-	padding-left:10px;
-}
-QComboBox::drop-down{
-	border:0px;
-}
-QComboBox::down-arrow {
-	image: url(:/image/down.png);
-	width:12;
-	height12;
-	margin-right:15px;
-}
-
-QComboBox:on{
-	border: 4px solid #c2dbfe;
-}
-QComboBox QListView{
-	font-size:12;
-	border:1px solid rgba(0,0,0,10%);
-	padding :5px;
-	background-color:#ffffff;
-	outline:0px;
-}
-QComboBox QListView::item{
-	padding-left :10px;
-	background-color:#ffffff;
-	
-}
-QComboBox QListView::item:hover{
-	background-color:#1e90ff;
-}
-QComboBox QListView::item:selected{
-	background-color:#1e90ff;
-}</string>
+                       <property name="text">
+                        <string>بحث الاسم</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="6">
+                     <item row="1" column="1">
+                      <widget class="QFrame" name="frame_12">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="8">
                       <widget class="QLineEdit" name="procut_sell">
                        <property name="minimumSize">
                         <size>
@@ -1368,6 +1334,57 @@ QLineEdit::focus{
                        </property>
                        <property name="placeholderText">
                         <string/>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="3">
+                      <widget class="QLabel" name="label_5">
+                       <property name="font">
+                        <font>
+                         <pointsize>11</pointsize>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>العدد</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="2">
+                      <widget class="QLineEdit" name="price_sell">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <pointsize>11</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QLineEdit{
+border:2px solid transparent;
+border-radius: 8px;
+padding: 0px 8px;
+background-color: rgb(242, 248, 255);
+}
+QLineEdit::hover{
+
+	border: 2px solid rgb(103, 222, 255);
+}
+QLineEdit::focus{
+	border: 2px solid rgb(103, 222, 255);
+}</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -1456,19 +1473,19 @@ QPushButton:hover
                        </property>
                       </widget>
                      </item>
-                     <item row="0" column="4">
-                      <widget class="QLabel" name="label_4">
+                     <item row="0" column="5">
+                      <widget class="QLabel" name="label_3">
                        <property name="font">
                         <font>
                          <pointsize>11</pointsize>
                         </font>
                        </property>
                        <property name="text">
-                        <string>اختر اللون</string>
+                        <string>اختر المقاس</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="4">
+                     <item row="1" column="6">
                       <widget class="QComboBox" name="size_sell">
                        <property name="minimumSize">
                         <size>
@@ -1531,71 +1548,14 @@ QComboBox QListView::item:selected{
                       </widget>
                      </item>
                      <item row="0" column="6">
-                      <widget class="QLabel" name="label_10">
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>25</height>
-                        </size>
-                       </property>
+                      <widget class="QLabel" name="label_4">
                        <property name="font">
                         <font>
                          <pointsize>11</pointsize>
                         </font>
                        </property>
                        <property name="text">
-                        <string>بحث الاسم</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="5">
-                      <widget class="QLabel" name="label_3">
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>اختر المقاس</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="2">
-                      <widget class="QLineEdit" name="price_sell">
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>100</width>
-                         <height>16777215</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                        </font>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">QLineEdit{
-border:2px solid transparent;
-border-radius: 8px;
-padding: 0px 8px;
-background-color: rgb(242, 248, 255);
-}
-QLineEdit::hover{
-
-	border: 2px solid rgb(103, 222, 255);
-}
-QLineEdit::focus{
-	border: 2px solid rgb(103, 222, 255);
-}</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
+                        <string>اختر اللون</string>
                        </property>
                       </widget>
                      </item>
@@ -1611,25 +1571,65 @@ QLineEdit::focus{
                        </property>
                       </widget>
                      </item>
-                     <item row="0" column="3">
-                      <widget class="QLabel" name="label_5">
+                     <item row="1" column="5">
+                      <widget class="QComboBox" name="color_sell">
+                       <property name="minimumSize">
+                        <size>
+                         <width>100</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <pointsize>11</pointsize>
                         </font>
                        </property>
-                       <property name="text">
-                        <string>العدد</string>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
                        </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QFrame" name="frame_12">
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Raised</enum>
+                       <property name="styleSheet">
+                        <string notr="true">QComboBox{
+	border: 1px solid #ced4da;
+	border-radius:4px;
+	padding-left:10px;
+}
+QComboBox::drop-down{
+	border:0px;
+}
+QComboBox::down-arrow {
+	image: url(:/image/down.png);
+	width:12;
+	height12;
+	margin-right:15px;
+}
+
+QComboBox:on{
+	border: 4px solid #c2dbfe;
+}
+QComboBox QListView{
+	font-size:12;
+	border:1px solid rgba(0,0,0,10%);
+	padding :5px;
+	background-color:#ffffff;
+	outline:0px;
+}
+QComboBox QListView::item{
+	padding-left :10px;
+	background-color:#ffffff;
+	
+}
+QComboBox QListView::item:hover{
+	background-color:#1e90ff;
+}
+QComboBox QListView::item:selected{
+	background-color:#1e90ff;
+}</string>
                        </property>
                       </widget>
                      </item>
@@ -1730,7 +1730,7 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                           <x>0</x>
                           <y>0</y>
                           <width>1023</width>
-                          <height>572</height>
+                          <height>577</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -2591,8 +2591,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>1023</width>
+                       <height>639</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -2889,8 +2889,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>68</width>
+                       <height>16</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -3125,8 +3125,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>1007</width>
-                          <height>154</height>
+                          <width>64</width>
+                          <height>104</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -3344,8 +3344,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>1007</width>
-                          <height>154</height>
+                          <width>64</width>
+                          <height>104</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -3637,8 +3637,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>1007</width>
-                          <height>154</height>
+                          <width>64</width>
+                          <height>104</height>
                          </rect>
                         </property>
                         <property name="styleSheet">
@@ -3740,7 +3740,7 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                        <x>0</x>
                        <y>0</y>
                        <width>1043</width>
-                       <height>780</height>
+                       <height>785</height>
                       </rect>
                      </property>
                      <property name="font">
@@ -5036,8 +5036,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>100</width>
-                                  <height>30</height>
+                                  <width>64</width>
+                                  <height>99</height>
                                  </rect>
                                 </property>
                                 <layout class="QVBoxLayout" name="verticalLayout_42"/>
@@ -5389,7 +5389,7 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                 <x>0</x>
                                 <y>0</y>
                                 <width>214</width>
-                                <height>450</height>
+                                <height>455</height>
                                </rect>
                               </property>
                               <layout class="QVBoxLayout" name="verticalLayout_44"/>

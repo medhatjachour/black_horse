@@ -59,6 +59,9 @@ def get_products_by_name(db: _orm.Session, name: str):
 def get_products_by_name_and_size(db: _orm.Session, name: str, size: str):
     return db.query(_models.Product).filter(_models.Product.name == name).filter(_models.Product.size == size).all()
 
+def get_products_by_name_and_color(db: _orm.Session, name: str, color: str):
+    return db.query(_models.Product).filter(_models.Product.name == name).filter(_models.Product.color == color).all()
+
 def get_product(db: _orm.Session, name: str, color: str, size: str):
 
     return db.query(_models.Product).filter(_models.Product.name == name ).filter(_models.Product.size == size).filter(_models.Product.color == color ).first()
