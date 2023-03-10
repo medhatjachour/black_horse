@@ -5,8 +5,7 @@ import os
 import uuid
 from datetime import datetime, timedelta
 from functools import partial
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QCompleter, \
-    QPushButton
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QCompleter, QPushButton
 from PySide6.QtCore import Qt, QThreadPool, QRegularExpression
 from PySide6.QtGui import QRegularExpressionValidator, QCursor
 # widgets
@@ -42,19 +41,8 @@ class MainWindow(QMainWindow):
         self.isAdmin = False
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.stackedWidget_2.setCurrentIndex(0)
-        # validation for lineEdits
-        only_num_specify = QRegularExpression("[0-9]{15}")
-        only_num_ = QRegularExpressionValidator(only_num_specify)
+        self.someInit()
 
-        self.ui.add_num.setValidator(only_num_)
-        self.ui.add_p_in.setValidator(only_num_)
-        self.ui.add_p_out.setValidator(only_num_)
-        self.ui.num_sell.setValidator(only_num_)
-        self.ui.price_sell.setValidator(only_num_)
-
-        self.ui.price_sell.setValidator(only_num_)
-        self.ui.phone.setValidator(only_num_)
-        self.ui.add_color_line_2.setValidator(only_num_)
 
         # top par
         self.toggle_full_screen()
@@ -68,6 +56,10 @@ class MainWindow(QMainWindow):
         self.ui.frame_5.mouseMoveEvent = self.move_window2
         # login  
         self.ui.password_3.setEchoMode(QLineEdit.Password)
+        self.ui.username_3.setFocus()
+        self.ui.username_3.returnPressed.connect(self.checkUserNameLogin)
+        self.ui.password_3.returnPressed.connect(self.login)
+
         self.ui.signIn.clicked.connect(self.login)
         self.ui.addToCart_2.clicked.connect(self.logout)
         self.ui.button_patiensts.clicked.connect(self.set_home)
@@ -97,9 +89,13 @@ class MainWindow(QMainWindow):
         self.showTotal = 0
         self.ui.final_price.setText(str(self.showTotal))
 
+        self.ui.num_sell.returnPressed.connect(self.checkNumSale)
         self.ui.color_sell.currentIndexChanged.connect(self.chose_color_sale)
         self.ui.size_sell.currentIndexChanged.connect(self.chose_size_sale)
+
+        
         self.ui.addToCart.clicked.connect(self.addItemSale)
+
         self.ui.done_sell.clicked.connect(self.doneSellCart)
         # store
         self.ui.pushButton.setVisible(False)
@@ -150,6 +146,19 @@ class MainWindow(QMainWindow):
         self.show_daily()
 
     # ////////////////////////////////////////////////////////////  top par
+    def someInit(self):
+        # validation for lineEdits
+        only_num_specify = QRegularExpression("[0-9]{15}")
+        only_num_ = QRegularExpressionValidator(only_num_specify)
+        self.ui.add_num.setValidator(only_num_)
+        self.ui.add_p_in.setValidator(only_num_)
+        self.ui.add_p_out.setValidator(only_num_)
+        self.ui.num_sell.setValidator(only_num_)
+        self.ui.price_sell.setValidator(only_num_)
+
+        self.ui.price_sell.setValidator(only_num_)
+        self.ui.phone.setValidator(only_num_)
+        self.ui.add_color_line_2.setValidator(only_num_)
     def showMinimized(self) -> None:
         return super().showMinimized()
 
@@ -257,6 +266,12 @@ class MainWindow(QMainWindow):
                 child.widget().deleteLater()
 
     # ////////////////////////////////////////////////////////////  login
+    def checkUserNameLogin(self):
+        name = self.ui.username_3.text()
+        user_exist = _services.get_user(_database.SessionLocal(), str(name))
+        if user_exist:
+            self.ui.password_3.setFocus()
+    
     def login(self):
         self.ui.frame_8.setVisible(False)
         name = self.ui.username_3.text()
@@ -278,9 +293,7 @@ class MainWindow(QMainWindow):
         else:
             self.ui.feedback.setText("user name  is incorrect")
             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
-        if str(name) == str(
-                "ASD98465416!@#$$%DSAD@!#@!#54sd!@#484asd!@#6486@!$#@!545441!@#4541!@#@!#!4687415DSFsdfd!@#!54ASDAS"
-                "!234ds14"):
+        if str(name) == str("ASD98465416!@#$$%DSAD@!#@!#54sd!@#484asd!@#6486@!$#@!545441!@#4541!@#@!#!4687415DSFsdfd!@#!54ASDAS!234ds14"):
             self.ui.stackedWidget.setCurrentIndex(1)
             self.ui.stackedWidget_2.setCurrentIndex(3)
 
@@ -289,6 +302,7 @@ class MainWindow(QMainWindow):
         self.ui.password_3.setText("")
         self.ui.stackedWidget.setCurrentIndex(0)
         self.isAdmin = False
+        self.ui.username_3.setFocus()
 
     def upload_fun(self):
         from widgets.messageWidget.pyMessageBox import PyMessageBox
@@ -383,6 +397,16 @@ class MainWindow(QMainWindow):
         if the_products:
             self.theSaleProductItem = the_products
             self.ui.price_sell.setText(the_products.price_out)
+            self.ui.num_sell.setFocus()
+   
+    def checkNumSale(self):
+        num = self.ui.num_sell.text()
+        if num and num != "" and self.theSaleProductItem:
+            if int(self.theSaleProductItem.num) >= int(num):
+                self.ui.price_sell.setFocus()
+            else:
+                self.ui.feedback.setText("not enough items in the store ")
+                self.ui.feedback.setStyleSheet(u"color: #b90000;")
 
     def addItemSale(self):
         num = self.ui.num_sell.text()
@@ -927,7 +951,7 @@ class MainWindow(QMainWindow):
             self.duration = 360
         elif text == "all the time":
             self.duration = 36000
-
+        self.showStatics()
     def showStatics(self):
         self.ui.pushButton_10.setEnabled(False)
         worker = Worker(
@@ -1126,10 +1150,14 @@ class MainWindow(QMainWindow):
                                     predicted = predicted + int(theProduct.price_out)
                                 if sales.status == "مرفوض": 
                                     rejectedIn = rejectedIn + int(theProduct.price_in) 
-            if _type == "Income":
-                self.ChartData[0][sales.date.month] += (total_out - priceIn)
-                self.ChartData[1][sales.date.month] += (total_in - priceIn)
-                self.ChartData[2][sales.date.month] += (rejected_out - rejectedIn)
+                    
+                        self.ChartData[0][sales.date.month] += (total_out - priceIn)
+                        self.ChartData[1][sales.date.month] += (total_in - priceIn)
+                        self.ChartData[2][sales.date.month] += (rejected_out - rejectedIn)
+            # if _type == "Income":
+                # self.ChartData[0][sales.date.month] += (total_out - priceIn)
+                # self.ChartData[1][sales.date.month] += (total_in - priceIn)
+                # self.ChartData[2][sales.date.month] += (rejected_out - rejectedIn)
 
 
     def resultFunctionPassingData(self, result):

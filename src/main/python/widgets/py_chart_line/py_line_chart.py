@@ -29,10 +29,10 @@ class PyLineChart(QWidget):
         bg_color = "#343b48",
         line_color = "#cd1234",
         data = [
-            [0, 132, 101, 134, 90, 230, 210,132, 101, 134, 90, 230,],
-            [0, 14, 240, 111, 50, 120, 20,132, 101, 134, 90, 230,],
-            [10, 140, 40, 11, 150, 200, 120,132, 101, 134, 90, 230,],
-            [80, 40, 24, 59, 99, 20, 200,132, 101, 134, 90, 230,],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         ],
         seriesNames = []
     ):
@@ -84,8 +84,7 @@ class PyLineChart(QWidget):
                 name = self.sender().name()
             except:
                 name = ""
-            QToolTip.showText(QCursor.pos(), "%s\nx: %s\ny: %s" %
-                              (name, point.x(), point.y()))
+            QToolTip.showText( QCursor.pos() , "%s\nx: %s\ny: %s" % (name, round(point.x()),round( point.y())))
 
     def initChart(self,line_color):
         self.chart = QChart(title="Line Chart")
