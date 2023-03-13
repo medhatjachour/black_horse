@@ -15,7 +15,9 @@ class Product(Base):
     name = Column(String)
 
     num = Column(String, nullable=True)
-    # sex = Column(String, default="Man", nullable=True)
+
+    file_path = Column(String, nullable=True)
+    
     price_in = Column(String, nullable=True)
     price_out = Column(String, index=True, nullable=True)
 

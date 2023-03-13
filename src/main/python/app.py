@@ -5,9 +5,9 @@ import os
 import uuid
 from datetime import datetime, timedelta
 from functools import partial
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QCompleter, QPushButton
-from PySide6.QtCore import Qt, QThreadPool, QRegularExpression
-from PySide6.QtGui import QRegularExpressionValidator, QCursor
+from PySide6.QtWidgets import QApplication, QMainWindow,QFileDialog , QLabel, QLineEdit, QSpacerItem, QSizePolicy, QCompleter, QPushButton
+from PySide6.QtCore import Qt, QThreadPool, QRegularExpression,QSize
+from PySide6.QtGui import QRegularExpressionValidator, QCursor,QIcon
 # widgets
 from ui.ui_main import Ui_MainWindow
 from widgets.worker.Worker import Worker
@@ -98,6 +98,7 @@ class MainWindow(QMainWindow):
 
         self.ui.done_sell.clicked.connect(self.doneSellCart)
         # store
+        self.ImagePath = None
         self.ui.pushButton.setVisible(False)
         self.sizes = []
         self.colors = []
@@ -108,6 +109,7 @@ class MainWindow(QMainWindow):
         self.ui.enter_store.clicked.connect(self.enterStoreFun)
         self.ui.color_sell_3.currentIndexChanged.connect(self.addProductColors)
         self.ui.color_sell_4.currentIndexChanged.connect(self.addProductSizes)
+        self.ui.pushButton_14.clicked.connect(self.choseProductImage)
         # salesStore
         self.ui.color_sell_2.addItem("")
         self.ui.color_sell_2.addItem("رقم العملية")
@@ -139,6 +141,9 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_13.clicked.connect(self.show_daily)
         self.ui.button_patiensts_8.clicked.connect(self.showCharts)
         self.ui.button_patiensts_9.clicked.connect(self.showOutCome)
+
+        self.ui.add_color_line_2.returnPressed.connect(self.addOutPress)
+        self.ui.add_color_line_3.returnPressed.connect(self.createOutPut)
         self.ui.add_color_btn_2.clicked.connect(self.createOutPut)
         self.showOutPut()
         self.showGard()
@@ -159,6 +164,7 @@ class MainWindow(QMainWindow):
         self.ui.price_sell.setValidator(only_num_)
         self.ui.phone.setValidator(only_num_)
         self.ui.add_color_line_2.setValidator(only_num_)
+    
     def showMinimized(self) -> None:
         return super().showMinimized()
 
@@ -183,19 +189,19 @@ class MainWindow(QMainWindow):
         event.accept()
 
     def close_fun(self):
-        from widgets.messageWidget.pyMessageBox import PyMessageBox
-        PyMessageBox(
-            323,
-            176,
-            " تنبيه",
-            " نسخ احتياطي ",
-            " سيتم استبدال ال داتا الموجودة علي السحابه ب احدث داتا الان",
-            "رفع",
-            "الغاء"
-        )
-        if PyMessageBox.theStateOfTheMessaheBox(self):
-            path = app_context.get_resource('data/client_secret.json')
-            # upload_db(path)
+        # from widgets.messageWidget.pyMessageBox import PyMessageBox
+        # PyMessageBox(
+        #     323,
+        #     176,
+        #     " تنبيه",
+        #     " نسخ احتياطي ",
+        #     " سيتم استبدال ال داتا الموجودة علي السحابه ب احدث داتا الان",
+        #     "رفع",
+        #     "الغاء"
+        # )
+        # if PyMessageBox.theStateOfTheMessaheBox(self):
+        #     path = app_context.get_resource('data/client_secret.json')
+        #     # upload_db(path)
 
         self.close()
 
@@ -336,7 +342,7 @@ class MainWindow(QMainWindow):
 
         if PyMessageBox.theStateOfTheMessaheBox(self):
             path = app_context.get_resource('data/client_secret.json')
-            # download_db(path)
+            download_db(path)
             self.ui.feedback.setText("downloaded successfully")
             self.ui.feedback.setStyleSheet(u"color: #10e205;")
 
@@ -448,7 +454,7 @@ class MainWindow(QMainWindow):
         from widgets.productWidget.ui_selling import ProductWidget
         for i in self.cart:
             self.ui.verticalLayout_12.addWidget(
-                ProductWidget((i[0]).id, (i[0]).name, (i[0]).size, (i[0]).color, i[1], (i[0]).price_out, i[2], "sale"))
+                ProductWidget((i[0]).id, (i[0]).name, (i[0]).size, (i[0]).color, i[1], (i[0]).price_out, i[2], "sale", i[0].file_path))
 
         self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
                                             QSizePolicy.Expanding)
@@ -580,7 +586,6 @@ class MainWindow(QMainWindow):
                 self.ui.enter_store.setText("ادخال")
 
             self.ui.feedback.setText(f"")
-
     # sizes
     def ShowSizesInComboBox(self):
 
@@ -611,6 +616,18 @@ class MainWindow(QMainWindow):
             self.colors.remove(name)
 
             # product
+
+    def choseProductImage(self):
+        # check if it's ana image
+        fileName = QFileDialog.getOpenFileName(self, 'Open Image', '', 'Image files (*.jpg *.jpeg *.png)')
+        self.ImagePath = fileName[0]
+        print(fileName[1])
+        print(self.ImagePath)
+        icon2 = QIcon()
+        icon2.addFile(self.ImagePath, QSize(), QIcon.Normal, QIcon.Off)
+        self.ui.pushButton_14.setIcon(icon2)
+        self.ui.pushButton_14.setIconSize(QSize(42, 42))
+
 
     def enterStoreFun(self):
 
@@ -645,6 +662,7 @@ class MainWindow(QMainWindow):
                                             "id": str(uuid.uuid4()),
                                             "name": name,
                                             "num": num,
+                                            "file_path": self.ImagePath,
                                             "price_in": priceIn,
                                             "price_out": priceOut,
                                             "color": color,
@@ -702,6 +720,9 @@ class MainWindow(QMainWindow):
             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
 
     def resultFunction(self, result):
+        self.ImagePath = None
+        self.ui.pushButton_14.setIcon(QIcon())
+
         name = (self.ui.add_product.text()).lower()
         if self.namingSearch:
             if name and len(name) > 0 and name != "":
@@ -719,7 +740,7 @@ class MainWindow(QMainWindow):
         from widgets.productWidget.ui_selling import ProductWidget
         for i in (products[::-1]):
             self.ui.verticalLayout_13.addWidget(
-                ProductWidget(i.id, i.name, i.size, i.color, i.num, i.price_in, i.price_out, "store"))
+                ProductWidget(i.id, i.name, i.size, i.color, i.num, i.price_in, i.price_out, "store", i.file_path))
         self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
                                             QSizePolicy.Expanding)
         self.ui.verticalLayout_13.addItem(self.vertical_spacer2)
@@ -998,12 +1019,15 @@ class MainWindow(QMainWindow):
         self.ui.label_59.setText(f"{str(predictedIncome)} $")
         self.ui.label_67.setText(f"{str(priceIn)} $")
 
+
         theOutPut = _services.get_outputs(_database.SessionLocal())
         if theOutPut:
             for sales in theOutPut:
                 if sales.date >= (datetime.now() - timedelta(days=int(self.duration))):
                     output += sales.num
+
         self.ui.label_74.setText(f"{str(output)} $")
+        self.ui.label_21.setText(f"{str(total_in - output)}")
 
     def resultFunctionStatics(self, result):
         self.ui.pushButton_10.setEnabled(True)
@@ -1044,6 +1068,10 @@ class MainWindow(QMainWindow):
     def showOutCome(self):
         self.ui.stackedWidget_4.setCurrentIndex(1)
 
+    def addOutPress(self):
+        num = self.ui.add_color_line_2.text()
+        if num and len(num) > 0:
+            self.ui.add_color_line_3.setFocus()
     def createOutPut(self):
         num = self.ui.add_color_line_2.text()
         disc = self.ui.add_color_line_3.text()

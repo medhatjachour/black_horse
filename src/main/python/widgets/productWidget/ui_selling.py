@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
     QWidget)
 
+from widgets.viewproduct.pyViewWidget import PyViewBox
 from orm import services as _services
 from orm import database as _database
 
@@ -33,6 +34,7 @@ class ProductWidget(QFrame):
         priceIn,
         priceOut,
         _type,
+        image = None,
     ):
         super().__init__()
         self._id = _id
@@ -43,9 +45,10 @@ class ProductWidget(QFrame):
         self._priceIn = priceIn
         self._priceOut = priceOut
         self._type = _type
+        self._image = image
         self.setObjectName("self")
         self.resize(812, 50)
-        self.setMaximumHeight(50)
+        # self.setMaximumHeight(50)
         self.setStyleSheet(u"")
         self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setSpacing(0)
@@ -269,18 +272,32 @@ class ProductWidget(QFrame):
         self.label_2.setText( self._size)
         self.label_3.setText(self._color)
         self.label.setText( self._name)
-        
-        if self._type == "store":
-            self.Change.clicked.connect(self.editItem)
-            self.deleteItem.clicked.connect(self.removeItemInStore)
+
         if self._type == "sale":
             self.Change.setVisible(False)
             self.deleteItem.setVisible(False)
             # self.num_sell.setText("__ ")
 
+                
+        if self._type == "store" or self._type == "sale":
+            if image :
+                self.imageBtn = QPushButton(self.frame_2)
+                self.imageBtn.setObjectName(u"imageBtn")
+                self.imageBtn.setGeometry(QRect(0, 0, 42, 42))
+                icon = QIcon()
+                icon.addFile(image, QSize(), QIcon.Normal, QIcon.Off)
+                self.imageBtn.setIcon(icon)
+                self.imageBtn.setIconSize(QSize(42, 42))
+                self.imageBtn.clicked.connect(self.ViewImage)
+                self.Change.clicked.connect(self.editItem)
+            
+            self.deleteItem.clicked.connect(self.removeItemInStore)
+
 
         QMetaObject.connectSlotsByName(self)
         self.edit_state = True 
+    def ViewImage(self):
+        PyViewBox(100 , 100, self._image, self._name )
     def editItem(self):
         num = self.label_4.text()
         price_in = self.num_sell.text()

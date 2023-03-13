@@ -5,6 +5,7 @@ import pydantic as _pydantic
 class Product(_pydantic.BaseModel):
     id:str
     name:str
+    file_path:str
     color_id:int
     size_id:int
     num:int
