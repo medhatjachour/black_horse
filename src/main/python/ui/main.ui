@@ -2565,7 +2565,7 @@ QPushButton:hover
 }</string>
                        </property>
                        <property name="text">
-                        <string> </string>
+                        <string/>
                        </property>
                        <property name="icon">
                         <iconset>
@@ -2651,8 +2651,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1023</width>
-                       <height>594</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -2949,8 +2949,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1025</width>
-                       <height>616</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -3186,7 +3186,7 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                           <x>0</x>
                           <y>0</y>
                           <width>1007</width>
-                          <height>141</height>
+                          <height>139</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -3698,7 +3698,7 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                           <x>0</x>
                           <y>0</y>
                           <width>1007</width>
-                          <height>141</height>
+                          <height>139</height>
                          </rect>
                         </property>
                         <property name="styleSheet">
@@ -4424,7 +4424,7 @@ QComboBox QListView::item:selected{
                            </property>
                            <item>
                             <property name="text">
-                             <string>last 24 hours</string>
+                             <string>Today</string>
                             </property>
                            </item>
                            <item>

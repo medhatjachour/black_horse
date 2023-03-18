@@ -150,6 +150,16 @@ class MainWindow(QMainWindow):
         self.showStatics()
         self.show_daily()
 
+        # 
+        # from widgets.Py_3DChart.Py_3DChart import Py3DChart
+        # self.lineChart = Py3DChart(
+
+        # )
+        # self.ui.verticalLayout_12.addWidget(self.lineChart)
+
+
+
+
     # ////////////////////////////////////////////////////////////  top par
     def someInit(self):
         # validation for lineEdits
@@ -324,7 +334,7 @@ class MainWindow(QMainWindow):
 
         if PyMessageBox.theStateOfTheMessaheBox(self):
             path = app_context.get_resource('data/client_secret.json')
-            # upload_db(path)
+            upload_db(path)
             self.ui.feedback.setText("uploaded successfully")
             self.ui.feedback.setStyleSheet(u"color: #10e205;")
 
@@ -621,13 +631,10 @@ class MainWindow(QMainWindow):
         # check if it's ana image
         fileName = QFileDialog.getOpenFileName(self, 'Open Image', '', 'Image files (*.jpg *.jpeg *.png)')
         self.ImagePath = fileName[0]
-        print(fileName[1])
-        print(self.ImagePath)
         icon2 = QIcon()
         icon2.addFile(self.ImagePath, QSize(), QIcon.Normal, QIcon.Off)
         self.ui.pushButton_14.setIcon(icon2)
         self.ui.pushButton_14.setIconSize(QSize(42, 42))
-
 
     def enterStoreFun(self):
 
@@ -640,6 +647,24 @@ class MainWindow(QMainWindow):
         worker.signals.result.connect(partial(self.resultFunction))
         self.threadpool.start(worker)
 
+    def movingImage(self):
+        import shutil
+        from os.path import isdir, isfile, join
+        save_dir = join(os.getenv('USERPROFILE'), 'gm3a-data')
+        images = save_dir +"\\images"
+        if os.path.exists(images):
+            pass
+        else:
+            os.mkdir(images) # Make a folder
+            os.system("attrib + h " + images) # Hide the folder
+        old = self.ImagePath
+        name =  os.path.basename(self.ImagePath).split('/')[-1]
+        new = images + f'\\{name}.jpg'
+        if os.path.exists(new):
+            pass
+        else:
+            shutil.copy(old, new)
+            self.ImagePath = new
     def adding_thread(self, progress_callback):
         name = (self.ui.add_product.text()).lower()
         num = self.ui.add_num.text()
@@ -647,6 +672,7 @@ class MainWindow(QMainWindow):
         priceOut = self.ui.add_p_out.text()
         if len(self.sizes) > 0 and len(self.colors) > 0:
             self.ui.enter_store.setText("...adding")
+            self.movingImage()
             for size in self.sizes:
                 for color in self.colors:
                     TheProductExists = _services.get_product(_database.SessionLocal(), name, color, size)
@@ -676,16 +702,11 @@ class MainWindow(QMainWindow):
                                             self.ui.feedback.setText(f"product {name} created successfully")
                                             self.ui.feedback.setStyleSheet(u"color: #00946d;")
                                             if size == self.sizes[-1] and color == self.colors[-1]:
-                                                self.clear_tab_except_first(self.ui.verticalLayout_9)
-                                                self.clear_tab_except_first(self.ui.verticalLayout_10)
+                                                # self.clear_tab_except_first(self.ui.verticalLayout_9)
+                                                # self.clear_tab_except_first(self.ui.verticalLayout_10)
                                                 self.sizes = []
                                                 self.colors = []
-                                                self.ui.add_product.setText("")
-                                                self.ui.add_num.setText("")
-                                                self.ui.add_p_in.setText("")
-                                                self.ui.add_p_out.setText("")
-                                                self.ui.color_sell_3.setCurrentIndex(0)
-                                                self.ui.color_sell_4.setCurrentIndex(0)
+
                                         else:
                                             self.ui.feedback.setText(f"can't create product {name}")
                                             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
@@ -720,10 +741,15 @@ class MainWindow(QMainWindow):
             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
 
     def resultFunction(self, result):
-        self.ImagePath = None
-        self.ui.pushButton_14.setIcon(QIcon())
-
         name = (self.ui.add_product.text()).lower()
+        self.ui.add_product.setText("")
+        self.ui.add_num.setText("")
+        self.ui.add_p_in.setText("")
+        self.ui.add_p_out.setText("")
+        self.ui.color_sell_3.setCurrentIndex(0)
+        self.ui.color_sell_4.setCurrentIndex(0)
+        self.clear_tab_except_first(self.ui.verticalLayout_9)
+        self.clear_tab_except_first(self.ui.verticalLayout_10)
         if self.namingSearch:
             if name and len(name) > 0 and name != "":
                 searchedProducts = _services.get_products_by_name(_database.SessionLocal(), name)
@@ -732,6 +758,8 @@ class MainWindow(QMainWindow):
             self.showProductsInStore()
             self.main_completing()
         self.namingSearch = False
+        self.ImagePath = None
+        self.ui.pushButton_14.setIcon(QIcon())
 
     def showProductsInStore(self):
         self.ui.enter_store.setText("بحث ")
@@ -984,6 +1012,7 @@ class MainWindow(QMainWindow):
         self.threadpool.start(worker)
 
     def start_statics(self, progress_callback):
+        text = self.ui.color_sell_5.currentText()
         theSales = _services.get_all_sales(_database.SessionLocal())
         num = 0
         pieces_num = 0
@@ -994,10 +1023,11 @@ class MainWindow(QMainWindow):
         priceIn = 0
         output = 0
         theSales = _services.get_all_sales(_database.SessionLocal())
-        if theSales:
+        
+        if theSales and text != "Today":
             for sales in theSales:
                 if sales.status != "مرفوض":
-                    if sales.date >= (datetime.now() - timedelta(days=int(self.duration))):
+                    if sales.date >= (datetime.now() - timedelta(days=float(self.duration))):
                         num = num + 1
                         total_in = total_in + int(sales.total)
                         total_out = total_out + int(sales.real_total)
@@ -1009,6 +1039,38 @@ class MainWindow(QMainWindow):
                                 real = real + int(item.price_out)
                                 priceIn = priceIn + int(theProduct.price_in)
                                 predicted = predicted + int(theProduct.price_out)
+
+        theOutPut = _services.get_outputs(_database.SessionLocal())
+        if theOutPut and text != "Today":
+            for sales in theOutPut:
+                if sales.date >= (datetime.now() - timedelta(days=int(self.duration))):
+                    output += sales.num
+        
+
+                
+        if theSales and text == "Today":
+            for sales in theSales:
+                if sales.status != "مرفوض":
+                    if sales.date.date() == datetime.today().date():
+                        num = num + 1
+                        total_in = total_in + int(sales.total)
+                        total_out = total_out + int(sales.real_total)
+                        items = _services.get_sales_items(_database.SessionLocal(), sales.id)
+                        for item in items:
+                            pieces_num = pieces_num + int(item.num_of_products)
+                            theProduct = _services.get_product_by_id(_database.SessionLocal(), item.product_id)
+                            if theProduct:
+                                real = real + int(item.price_out)
+                                priceIn = priceIn + int(theProduct.price_in)
+                                predicted = predicted + int(theProduct.price_out)
+
+        theOutPut = _services.get_outputs(_database.SessionLocal())
+        if theOutPut and text == "Today":
+            for sales in theOutPut:
+                if sales.date.date() == datetime.today().date():
+                    output += sales.num
+        
+
         predictedIncome = int(predicted) - int(priceIn)
         real = real - int(priceIn)
         self.ui.label_53.setText(f"{str(num)} n")
@@ -1018,17 +1080,9 @@ class MainWindow(QMainWindow):
         self.ui.label_63.setText(f"{str(total_out)} $")
         self.ui.label_59.setText(f"{str(predictedIncome)} $")
         self.ui.label_67.setText(f"{str(priceIn)} $")
-
-
-        theOutPut = _services.get_outputs(_database.SessionLocal())
-        if theOutPut:
-            for sales in theOutPut:
-                if sales.date >= (datetime.now() - timedelta(days=int(self.duration))):
-                    output += sales.num
-
         self.ui.label_74.setText(f"{str(output)} $")
-        self.ui.label_21.setText(f"{str(total_in - output)}")
-
+        self.ui.label_21.setText(f"{str(real - output)}")
+    
     def resultFunctionStatics(self, result):
         self.ui.pushButton_10.setEnabled(True)
 

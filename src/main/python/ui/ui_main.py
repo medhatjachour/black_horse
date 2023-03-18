@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainYCNyHd.ui'
+## Form generated from reading UI file 'mainljqaDF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -1414,7 +1414,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1023, 590))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
@@ -1615,7 +1615,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 1025, 616))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_14 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_14.setSpacing(6)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
@@ -1768,7 +1768,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1007, 141))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1007, 139))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.scrollArea_5.setWidget(self.scrollAreaWidgetContents_5)
@@ -2097,7 +2097,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 1007, 141))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 1007, 139))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
@@ -3343,7 +3343,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(0)
-        self.stackedWidget_4.setCurrentIndex(0)
+        self.stackedWidget_4.setCurrentIndex(1)
         self.stackedWidget_3.setCurrentIndex(0)
 
 
@@ -3427,7 +3427,7 @@ class Ui_MainWindow(object):
         self.label_73.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0635\u0631\u0648\u0641\u0627\u062a", None))
         self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_68.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u062d\u0635\u0627\u0621\u0627\u062a", None))
-        self.color_sell_5.setItemText(0, QCoreApplication.translate("MainWindow", u"last 24 hours", None))
+        self.color_sell_5.setItemText(0, QCoreApplication.translate("MainWindow", u"Today", None))
         self.color_sell_5.setItemText(1, QCoreApplication.translate("MainWindow", u"last 7 days", None))
         self.color_sell_5.setItemText(2, QCoreApplication.translate("MainWindow", u"last 30 days", None))
         self.color_sell_5.setItemText(3, QCoreApplication.translate("MainWindow", u"last year", None))

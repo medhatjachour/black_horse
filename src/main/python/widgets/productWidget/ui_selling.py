@@ -16,7 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,QRegularExpressionValidator,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
+    QLineEdit, QPushButton, QFileDialog, QVBoxLayout,
     QWidget)
 
 from widgets.viewproduct.pyViewWidget import PyViewBox
@@ -269,8 +269,8 @@ class ProductWidget(QFrame):
         self.label_4.setText( self._num)
         self.num_sell.setText( self._priceIn)
         self.num_sell_2.setText( self._priceOut)
-        self.label_2.setText( self._size)
-        self.label_3.setText(self._color)
+        self.label_2.setText( self._color)
+        self.label_3.setText(self._size)
         self.label.setText( self._name)
 
         if self._type == "sale":
@@ -296,8 +296,42 @@ class ProductWidget(QFrame):
 
         QMetaObject.connectSlotsByName(self)
         self.edit_state = True 
+        self.ImagePath = None
     def ViewImage(self):
-        PyViewBox(100 , 100, self._image, self._name )
+        if self.edit_state:
+            PyViewBox(100 , 100, self._image, self._name )
+        else:
+            self.choseProductImage()
+    def choseProductImage(self):
+        # check if it's ana image
+        fileName = QFileDialog.getOpenFileName(self, 'Open Image', '', 'Image files (*.jpg *.jpeg *.png)')
+        self.ImagePath = fileName[0]
+        icon2 = QIcon()
+        icon2.addFile(self.ImagePath, QSize(), QIcon.Normal, QIcon.Off)
+        self.imageBtn.setIcon(icon2)
+        self.imageBtn.setIconSize(QSize(42, 42))
+        
+
+    def movingImage(self):
+        import os
+        import shutil
+        from os.path import isdir, isfile, join
+        save_dir = join(os.getenv('USERPROFILE'), 'gm3a-data')
+        images = save_dir +"\\images"
+        if os.path.exists(images):
+            pass
+        else:
+            os.mkdir(images) # Make a folder
+            os.system("attrib + h " + images) # Hide the folder
+        old = self.ImagePath
+        name =  os.path.basename(self.ImagePath).split('/')[-1]
+        new = images + f'\\{name}.jpg'
+        if os.path.exists(new):
+            pass
+        else:
+            shutil.copy(old, new)
+            self.ImagePath = new
+
     def editItem(self):
         num = self.label_4.text()
         price_in = self.num_sell.text()
@@ -319,7 +353,8 @@ class ProductWidget(QFrame):
             self.edit_state = False
         else:
             if num and price_in and price_out and len(num) > 0 and len(price_in) > 0 and len(price_out) > 0 and num != " " and price_in != " " and price_out != " ":
-                updatedProduct = _services.update_product(_database.SessionLocal(),self._id ,num,price_in, price_out)
+                self.movingImage()
+                updatedProduct = _services.update_product(_database.SessionLocal(),self._id ,num ,price_in , price_out, self.ImagePath)
                 if updatedProduct:
                     self.num_sell.setStyleSheet("background-color:transparent;")
                     self.num_sell.setStyleSheet("background-color:transparent;")

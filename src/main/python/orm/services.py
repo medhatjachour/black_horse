@@ -70,7 +70,7 @@ def delete_product(db: _orm.Session, product_id:str):
     db.query(_models.Product).filter(_models.Product.id  == product_id).delete()
     db.commit()
 
-def update_product(db: _orm.Session, product_id:str, num:str, price_in:str, price_out:str):
+def update_product(db: _orm.Session, product_id:str, num:str, price_in:str, price_out:str, file_path:str):
     db_product = get_product_by_id(db = db ,id =  product_id)
 
     # db_product.name = product.name
@@ -79,6 +79,7 @@ def update_product(db: _orm.Session, product_id:str, num:str, price_in:str, pric
     db_product.num = num
     db_product.price_in = price_in
     db_product.price_out = price_out
+    db_product.file_path = file_path
     # db_product.price_in = product.price_in
     # db_product.price_out = product.price_out
 
