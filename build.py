@@ -1,19 +1,27 @@
 from fbs.cmdline import command
 from os.path import dirname, join
-from shutil import copy
-import os
+from shutil import copytree
+from fbs import path
 import fbs.cmdline
+import os
 
 
 @command
-def mv_inst():
+def fix_google_imports():
 
-    import fbs
-    current_directory = os.getcwd()
-    src = join(current_directory, 'Installer.nsi')
-    des = join(dirname(fbs.__file__), '_defaults', 'src', 'installer', 'windows')
-    os.remove(join(des, 'Installer.nsi'))
-    copy(src, des)
+    import google_auth_oauthlib
+    import googleapiclient
+    import google.auth.transport
+
+    src = join(dirname(google_auth_oauthlib.__file__))
+    des = join(path('${freeze_dir}'), 'google_auth_oauthlib')
+    src1 = join(dirname(googleapiclient.__file__))
+    des1 = join(path('${freeze_dir}'), 'googleapiclient')
+    src2 = join(dirname(google.auth.transport.__file__))
+    des2 = join(path('${freeze_dir}'), 'google', 'auth', 'transport')
+    copytree(src, des)
+    copytree(src1, des1)
+    copytree(src2, des2)
 
 
 if __name__ == '__main__':

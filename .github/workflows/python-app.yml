@@ -18,6 +18,7 @@ jobs:
           Start-Process -FilePath "D:\a\black_horse\black_horse\vcredist_x64.exe" -ArgumentList "/Q" -Wait
           python -m pip install -r requirements.txt
           fbs freeze
+          python build.py fix_google_imports
           fbs installer
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
