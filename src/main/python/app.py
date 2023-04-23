@@ -3,6 +3,7 @@ import sys
 import math
 import os
 import uuid
+
 from datetime import datetime, timedelta
 from functools import partial
 from PySide6.QtWidgets import QApplication, QMainWindow,QFileDialog , QLabel, QLineEdit, QSpacerItem, QSizePolicy, QCompleter, QPushButton
@@ -17,6 +18,7 @@ from orm import database as _database
 from up_down import upload_db, download_db
 from fbs_runtime.application_context.PySide6 import ApplicationContext
 from widgets.py_chart_line.py_line_chart import PyLineChart
+
 
 app_context = ApplicationContext()
 # os.environ["QT_FONT_DPI"] = "2"
@@ -42,7 +44,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.stackedWidget_2.setCurrentIndex(0)
         self.someInit()
-
+        self.ui.stackedWidget_4.setCurrentIndex(0)
 
         # top par
         self.toggle_full_screen()
@@ -73,6 +75,7 @@ class MainWindow(QMainWindow):
         self.ui.button_patiensts_4.clicked.connect(self.set_right_settings)
         self.ui.addToCart_3.clicked.connect(self.upload_fun)
         self.ui.pushButton_12.clicked.connect(self.download)
+        
         # operation Sale
         self.removeCart = QPushButton(self.ui.frame)
         self.removeCart.setObjectName(u"removeCart")
@@ -87,6 +90,7 @@ class MainWindow(QMainWindow):
         self.theSaleProductItem = None
         self.cart = []
         self.showTotal = 0
+        self.ui.procut_sell.returnPressed.connect(self.onActivatedChosenProduct)
         self.ui.final_price.setText(str(self.showTotal))
 
         self.ui.num_sell.returnPressed.connect(self.checkNumSale)
@@ -99,12 +103,15 @@ class MainWindow(QMainWindow):
         self.ui.done_sell.clicked.connect(self.doneSellCart)
         # store
         self.ImagePath = None
+        self.skip = 0
+        self.limit = 50
         self.ui.pushButton.setVisible(False)
         self.sizes = []
         self.colors = []
         self.ShowColorsInComboBox()
         self.ShowSizesInComboBox()
         self.showProductsInStore()
+        self.ui.add_product.returnPressed.connect(self.enterStoreFun)
         self.ui.pushButton.clicked.connect(self.setDefaultStore)
         self.ui.enter_store.clicked.connect(self.enterStoreFun)
         self.ui.color_sell_3.currentIndexChanged.connect(self.addProductColors)
@@ -120,6 +127,11 @@ class MainWindow(QMainWindow):
         self.showSalesInSalesStore()
         self.ui.search.clicked.connect(self.searchInSalesStore)
         # settings 
+        
+        self.ui.button_patiensts_15.clicked.connect(self.set_a_page)
+        self.ui.button_patiensts_16.clicked.connect(self.set_b_page)
+        self.ui.button_patiensts_17.clicked.connect(self.set_c_page)
+
         self.ui.add_color_btn.clicked.connect(self.addColorFun)
         self.ui.add_color_line.returnPressed.connect(self.addColorFun)
         self.ui.add_size_bn.clicked.connect(self.addSizeFun)
@@ -127,9 +139,24 @@ class MainWindow(QMainWindow):
         self.ui.add_user.clicked.connect(self.addUserFun)
         self.ui.add_usr.returnPressed.connect(self.checkUserName)
         self.ui.add_pass.returnPressed.connect(self.addUserFun)
+        
+        self.ui.cat_name.returnPressed.connect(self.addCatFun)
+        self.ui.add_cat.clicked.connect(self.addCatFun)
+        self.ui.add_store.clicked.connect(self.addStoreFun)
+
+        self.ui.add_check.clicked.connect(self.addChecks)
+        self.remaining = []
+        self.ui.add_remaining.clicked.connect(self.addRemaining)
+
         self.showUsers()
         self.showColors()
         self.showSizes()
+        self.showStores()
+        self.showCats()
+        self.showChecks()
+
+        self.ShowCatsInComboBox()
+        self.ShowStoreInComboBox()
         # statics
         self.ChartData = [[]]
         self.SeriesNames = []
@@ -174,6 +201,10 @@ class MainWindow(QMainWindow):
         self.ui.price_sell.setValidator(only_num_)
         self.ui.phone.setValidator(only_num_)
         self.ui.add_color_line_2.setValidator(only_num_)
+
+        self.ui.check_paied.setValidator(only_num_)
+        self.ui.check_total.setValidator(only_num_)
+        self.ui.remaining.setValidator(only_num_)
     
     def showMinimized(self) -> None:
         return super().showMinimized()
@@ -522,6 +553,23 @@ class MainWindow(QMainWindow):
                     _database.SessionLocal(), sale_id, total, real_total
                 )
                 if finish_sale:
+                    # if phone:
+                    #     pass
+                        
+                        # #TODO: needs another thread
+                        # import pywhatkit as pwk
+                        # phone = str("+20" + str(phone))
+                        # print(phone) 
+                        # # using Exception Handling to avoid unexpected errors
+                        # print(date.year, date.month, date.day, date.hour, date.minute, date.second)
+                        # try:
+                        #     # sending message in Whatsapp in India so using Indian dial code (+20)
+                        #     pwk.sendwhatmsg(phone, "Hi, how are you?", int(date.hour), int(date.minute))
+                        #     print("Message Sent!") #Prints success message in console
+                        #     # error message
+                        # except: 
+                        #     print("Error in sending the message")
+
                     # refresh store and refresh the sales
                     self.clear_tab(self.ui.verticalLayout_12)
                     self.showSalesInSalesStore()
@@ -648,23 +696,25 @@ class MainWindow(QMainWindow):
         self.threadpool.start(worker)
 
     def movingImage(self):
-        import shutil
-        from os.path import isdir, isfile, join
-        save_dir = join(os.getenv('USERPROFILE'), 'gm3a-data')
-        images = save_dir +"\\images"
-        if os.path.exists(images):
-            pass
-        else:
-            os.mkdir(images) # Make a folder
-            os.system("attrib + h " + images) # Hide the folder
-        old = self.ImagePath
-        name =  os.path.basename(self.ImagePath).split('/')[-1]
-        new = images + f'\\{name}.jpg'
-        if os.path.exists(new):
-            pass
-        else:
-            shutil.copy(old, new)
-            self.ImagePath = new
+        if self.ImagePath:
+            import shutil
+            from os.path import isdir, isfile, join
+            save_dir = join(os.getenv('USERPROFILE'), 'gm3a-data')
+            images = save_dir +"\\images"
+            if os.path.exists(images):
+                pass
+            else:
+                os.mkdir(images) # Make a folder
+                os.system("attrib + h " + images) # Hide the folder
+            old = self.ImagePath
+            name =  os.path.basename(self.ImagePath).split('/')[-1]
+            new = images + f'\\{name}.jpg'
+            if os.path.exists(new):
+                pass
+            else:
+                shutil.copy(old, new)
+                self.ImagePath = new
+    
     def adding_thread(self, progress_callback):
         name = (self.ui.add_product.text()).lower()
         num = self.ui.add_num.text()
@@ -764,7 +814,7 @@ class MainWindow(QMainWindow):
     def showProductsInStore(self):
         self.ui.enter_store.setText("بحث ")
         self.clear_tab(self.ui.verticalLayout_13)
-        products = _services.get_products(_database.SessionLocal())
+        products = _services.get_products_pages(_database.SessionLocal(),self.skip,self.limit)
         from widgets.productWidget.ui_selling import ProductWidget
         for i in (products[::-1]):
             self.ui.verticalLayout_13.addWidget(
@@ -780,6 +830,7 @@ class MainWindow(QMainWindow):
         products = searchedProducts
         from widgets.productWidget.ui_selling import ProductWidget
         for i in (products[::-1]):
+        # for i in (products):
             self.ui.verticalLayout_13.addWidget(
                 ProductWidget(i.id, i.name, i.size, i.color, i.num, i.price_in, i.price_out, "store"))
 
@@ -844,7 +895,7 @@ class MainWindow(QMainWindow):
         sales = _services.get_all_sales(_database.SessionLocal())
         from widgets.selling_store.ui_sales_main import SalesMain
         for i in (sales[::-1]):
-            self.ui.verticalLayout_14.addWidget(SalesMain(i))
+            self.ui.verticalLayout_14.addWidget(SalesMain(i,"sales"))
 
         self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
                                             QSizePolicy.Expanding)
@@ -858,12 +909,22 @@ class MainWindow(QMainWindow):
         from widgets.selling_store.ui_sales_main import SalesMain
 
         for i in sales:
-            self.ui.verticalLayout_14.addWidget(SalesMain(i))
+            self.ui.verticalLayout_14.addWidget(SalesMain(i,"sales"))
         self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
                                             QSizePolicy.Expanding)
         self.ui.verticalLayout_14.addItem(self.vertical_spacer2)
 
     #  /////////////////////////////////////////////////////////// Edits
+    # PAGES
+    def set_a_page(self):
+        if self.isAdmin:
+            self.ui.stackedWidget_5.setCurrentIndex(0)
+    def set_b_page(self):
+        if self.isAdmin:
+            self.ui.stackedWidget_5.setCurrentIndex(1)
+    def set_c_page(self):
+        if self.isAdmin:
+            self.ui.stackedWidget_5.setCurrentIndex(2)
     # colors 
     def addColorFun(self):
         color = self.ui.add_color_line.text()
@@ -987,6 +1048,177 @@ class MainWindow(QMainWindow):
             self.ui.feedback.setText(f"the name must be at least 4 characters")
             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
 
+    # cats
+    def addCatFun(self):
+        cat = self.ui.cat_name.text()
+        if cat and cat != "" and cat != " ":
+            catExist = _services.get_cat(_database.SessionLocal(), str(cat))
+            if catExist:
+                self.ui.feedback.setText("cat already exists")
+                self.ui.feedback.setStyleSheet(u"color: #ff0000;")
+            else:
+                payload = {
+                    "id": str(uuid.uuid4()),
+                    "name": cat
+                }
+                createCat = _services.create_cat(
+                    _database.SessionLocal(), payload
+                )
+                if createCat:
+                    self.ui.cat_name.setText("")
+                    self.showCats()
+                    self.ShowCatsInComboBox()
+                    self.ui.feedback.setText("added successfully")
+                    self.ui.feedback.setStyleSheet(u"color: #00b359;")
+        else:
+            self.ui.feedback.setText("please enter a valid cat")
+            self.ui.feedback.setStyleSheet(u"color: #b90000;")
+
+    def showCats(self):
+        self.clear_tab(self.ui.verticalLayout_27)
+        cats = _services.get_cats(_database.SessionLocal())
+       
+        from widgets.size_color_user.ui_color_size import SizeAndColor
+        for i in (cats[::-1]):
+            self.ui.verticalLayout_27.addWidget(SizeAndColor(i.id, i.name, "cat"))
+        
+        self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
+                                            QSizePolicy.Expanding)
+        self.ui.verticalLayout_27.addItem(self.vertical_spacer2)
+
+    def ShowCatsInComboBox(self):
+
+        self.ui.chose_cat.clear()
+        cats = _services.get_cats(_database.SessionLocal())
+        self.ui.chose_cat.addItem("")
+        for i in cats:
+            self.ui.chose_cat.addItem(i.name)
+
+    # Store
+    def addStoreFun(self):
+        store = self.ui.store_name.text()
+        phone = self.ui.store_address.text()
+        address = self.ui.store_phone.text()
+        if store and store != "" and store != " ":
+            storeExist = _services.get_store(_database.SessionLocal(), str(store))
+            if storeExist:
+                self.ui.feedback.setText("cat already exists")
+                self.ui.feedback.setStyleSheet(u"color: #ff0000;")
+            else:
+                payload = {
+                    "id": str(uuid.uuid4()),
+                    "name": store,
+                    "phone": phone,
+                    "address": address
+                }
+                createStore = _services.create_store(
+                    _database.SessionLocal(), payload
+                )
+                if createStore:
+                    self.ui.store_name.setText("")
+                    self.ui.store_address.setText("")
+                    self.ui.store_phone.setText("")
+                    self.showStores()
+                    self.ShowStoreInComboBox()
+                    self.ui.feedback.setText("added successfully")
+                    self.ui.feedback.setStyleSheet(u"color: #00b359;")
+        else:
+            self.ui.feedback.setText("please enter a valid cat")
+            self.ui.feedback.setStyleSheet(u"color: #b90000;")
+
+    def showStores(self):
+        self.clear_tab(self.ui.verticalLayout_29)
+        stores = _services.get_stores(_database.SessionLocal())
+       
+        from widgets.size_color_user.ui_color_size import SizeAndColor
+        for i in (stores[::-1]):
+            self.ui.verticalLayout_29.addWidget(SizeAndColor(i.id, i.name, "store", i.phone, i.address))
+        
+        self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
+                                            QSizePolicy.Expanding)
+        self.ui.verticalLayout_29.addItem(self.vertical_spacer2)
+
+    def ShowStoreInComboBox(self):
+
+        self.ui.chose_store.clear()
+        stores = _services.get_stores(_database.SessionLocal())
+        self.ui.chose_store.addItem("")
+        for i in stores:
+            self.ui.chose_store.addItem(i.name)
+
+    # /// CHECKS
+    def addRemaining(self):
+        paid = self.ui.remaining.text()
+        date = self.ui.dateEdit.text()
+        date = datetime.strptime(date, "%d/%m/%Y")
+        w = []
+        if paid and date:
+            
+            from widgets.labelx.ui_alabelX import aLabelX
+            self.ui.verticalLayout_10.addWidget(aLabelX(the_size, "size"))
+            w.append(int(paid))
+            w.append(date)
+            self.remaining.append(w)
+            
+        self.ui.remaining.setText("")
+
+    def addChecks(self):
+        print(self.remaining)
+        name = self.ui.check_name.text()
+        phone = self.ui.check_phone.text()
+        address = self.ui.check_address.text()
+        total = self.ui.check_total.text()
+        paid = self.ui.check_paied.text()
+
+        date = datetime.now().date()
+        
+        payload = {
+            "name": name,
+            "phone": phone,
+            "address": address,
+            "date": date,
+            "total": int(total),
+            "paid": int(paid),
+        }
+        create_checks = _services.create_check(
+            _database.SessionLocal(), payload
+        )
+        if create_checks:
+            checks_id = create_checks.id
+            for i in self.remaining:
+                payload = {
+                    "paying": i[0],
+                    "date": i[1],
+                    "check_id": checks_id,
+                }
+                add_check_item = _services.create_check_item(
+                    _database.SessionLocal(), payload
+                )
+                if  not add_check_item:
+                    print("something wrong in adding check item")
+            self.ui.check_name.setText("")
+            self.ui.check_phone.setText("")
+            self.ui.check_address.setText("")
+            self.ui.check_total.setText("")
+            self.ui.check_paied.setText("")
+            self.showChecks()
+        else:
+            print("something wrong in adding check")
+    
+    def showChecks(self):
+
+        self.clear_tab(self.ui.verticalLayout_33)
+
+        checks = _services.get_checks(_database.SessionLocal())
+        from widgets.selling_store.ui_sales_main import SalesMain
+        for i in (checks[::-1]):
+            self.ui.verticalLayout_33.addWidget(SalesMain(i,"checks"))
+
+        self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
+                                            QSizePolicy.Expanding)
+        self.ui.verticalLayout_33.addItem(self.vertical_spacer2)
+
+
     #  /////////////////////////////////////////////////////////// Statics
     def changeDuration(self):
         text = self.ui.color_sell_5.currentText()
@@ -1001,6 +1233,7 @@ class MainWindow(QMainWindow):
         elif text == "all the time":
             self.duration = 36000
         self.showStatics()
+    
     def showStatics(self):
         self.ui.pushButton_10.setEnabled(False)
         worker = Worker(

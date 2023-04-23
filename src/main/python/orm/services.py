@@ -5,7 +5,7 @@ from orm import database as _database
 import sqlalchemy.orm as _orm
 from orm import models as _models
 from orm import schemas as _schemas
-# authentication
+# authenticheckion
 import os
 from os.path import isdir, isfile, join
 
@@ -49,6 +49,12 @@ def create_Product(db: _orm.Session, product: _schemas.Product):
 
 def get_products(db: _orm.Session):
     return db.query(_models.Product).all()
+
+def get_products_pages(db: _orm.Session, skip:int, limit:int):
+    # return db.query(_models.Product).offset(skip).limit(limit).all()
+    return db.query(_models.Product).order_by(_models.Product.id.desc()).offset(skip).limit(limit).all()
+    # users.select().order_by(users.c.id.desc()).limit(5)
+    # return db.query(_models.Product).all()[-limit]
 
 def get_product_by_id(db: _orm.Session, id: str):
     return db.query(_models.Product).filter(_models.Product.id == id).first()
@@ -260,4 +266,84 @@ def delete_sale(db: _orm.Session, Sale_item_id:int):
     db.query(_models.Sale_item).filter(_models.Sale_itemale_item.id  == Sale_item_id).delete()
     db.commit()
 
-#
+
+
+# stores ###################################################
+
+
+def create_store(db: _orm.Session , store:_schemas.Store ):
+    store = _models.Store(**store)
+    db.add(store)
+    db.commit()
+    db.refresh(store)
+    return store
+
+def get_store(db: _orm.Session, name: str):
+    return db.query(_models.Store).filter(_models.Store.name == name).first()
+
+def get_stores(db: _orm.Session):
+    return db.query(_models.Store).all()
+
+def delete_store(db: _orm.Session, store_id:str):
+    db.query(_models.Store).filter(_models.Store.id  == store_id).delete()
+    db.commit()
+
+# Cat ###################################################
+def create_cat(db: _orm.Session , cat:_schemas.Cat ):
+    cat = _models.Cat(**cat)
+    db.add(cat)
+    db.commit()
+    db.refresh(cat)
+    return cat
+
+def get_cat(db: _orm.Session, name: str):
+    return db.query(_models.Cat).filter(_models.Cat.name == name).first()
+
+def get_cats(db: _orm.Session):
+    return db.query(_models.Cat).all()
+
+def delete_cat(db: _orm.Session, cat_id:str):
+    db.query(_models.Cat).filter(_models.Cat.id  == cat_id).delete()
+    db.commit()
+
+# Checks ###################################################
+def create_check(db: _orm.Session , check:_schemas.Check ):
+    check = _models.Check(**check)
+    db.add(check)
+    db.commit()
+    db.refresh(check)
+    return check
+
+def get_check(db: _orm.Session, name: str):
+    return db.query(_models.Check).filter(_models.Check.name == name).first()
+
+def get_checks(db: _orm.Session):
+    return db.query(_models.Check).all()
+
+def delete_check(db: _orm.Session, check_id:str):
+    db.query(_models.Check).filter(_models.Check.id  == check_id).delete()
+    db.commit()
+
+
+    # Checks items ###################################################
+
+def create_check_item(db: _orm.Session , check_item:_schemas.Check_item ):
+    check_item = _models.Check_item(**check_item)
+    db.add(check_item)
+    db.commit()
+    db.refresh(check_item)
+    return check_item
+
+def get_check_item(db: _orm.Session, id: int):
+    return db.query(_models.Check_item).filter(_models.Check_item.id == id).first()
+
+def get_check_items(db: _orm.Session, check_id: int):
+    return db.query(_models.Check_item).filter(_models.Check_item.check_id == check_id).all()
+
+def get_all_check_items(db: _orm.Session):
+    return db.query(_models.check_item).all()
+
+def delete_check_item(db: _orm.Session, check_item_id:int):
+    db.query(_models.Check_item).filter(_models.Check_item.id  == check_item_id).delete()
+    db.commit()
+

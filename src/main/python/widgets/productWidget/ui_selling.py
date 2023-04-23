@@ -247,6 +247,9 @@ class ProductWidget(QFrame):
         self.verticalLayout.addWidget(self.frame)
 
 
+        self.edit_state = True 
+        self.ImagePath = None
+
         QMetaObject.connectSlotsByName(self)
 
         self.deleteItem.setText( "حذف")
@@ -256,6 +259,10 @@ class ProductWidget(QFrame):
         self.num_sell.setReadOnly(True)
         self.num_sell_2.setReadOnly(True)
         self.label_4.setReadOnly(True)
+
+
+
+        
         if self._type == "store_sales":
             self.Change.setVisible(False)
             self.deleteItem.setVisible(False)
@@ -280,23 +287,20 @@ class ProductWidget(QFrame):
 
                 
         if self._type == "store" or self._type == "sale":
-            if image :
-                self.imageBtn = QPushButton(self.frame_2)
-                self.imageBtn.setObjectName(u"imageBtn")
-                self.imageBtn.setGeometry(QRect(0, 0, 42, 42))
-                icon = QIcon()
-                icon.addFile(image, QSize(), QIcon.Normal, QIcon.Off)
-                self.imageBtn.setIcon(icon)
-                self.imageBtn.setIconSize(QSize(42, 42))
-                self.imageBtn.clicked.connect(self.ViewImage)
-                self.Change.clicked.connect(self.editItem)
-            
+        # if image :
+            self.imageBtn = QPushButton(self.frame_2)
+            self.imageBtn.setObjectName(u"imageBtn")
+            self.imageBtn.setGeometry(QRect(0, 0, 42, 42))
+            icon = QIcon()
+            icon.addFile(image, QSize(), QIcon.Normal, QIcon.Off)
+            self.imageBtn.setIcon(icon)
+            self.imageBtn.setIconSize(QSize(42, 42))
+            self.imageBtn.clicked.connect(self.ViewImage)
+            self.Change.clicked.connect(self.editItem)
             self.deleteItem.clicked.connect(self.removeItemInStore)
 
 
         QMetaObject.connectSlotsByName(self)
-        self.edit_state = True 
-        self.ImagePath = None
     def ViewImage(self):
         if self.edit_state:
             PyViewBox(100 , 100, self._image, self._name )
@@ -304,33 +308,35 @@ class ProductWidget(QFrame):
             self.choseProductImage()
     def choseProductImage(self):
         # check if it's ana image
-        fileName = QFileDialog.getOpenFileName(self, 'Open Image', '', 'Image files (*.jpg *.jpeg *.png)')
-        self.ImagePath = fileName[0]
-        icon2 = QIcon()
-        icon2.addFile(self.ImagePath, QSize(), QIcon.Normal, QIcon.Off)
-        self.imageBtn.setIcon(icon2)
-        self.imageBtn.setIconSize(QSize(42, 42))
+        if self._type == "store" :
+            fileName = QFileDialog.getOpenFileName(self, 'Open Image', '', 'Image files (*.jpg *.jpeg *.png)')
+            self.ImagePath = fileName[0]
+            icon2 = QIcon()
+            icon2.addFile(self.ImagePath, QSize(), QIcon.Normal, QIcon.Off)
+            self.imageBtn.setIcon(icon2)
+            self.imageBtn.setIconSize(QSize(42, 42))
         
 
     def movingImage(self):
-        import os
-        import shutil
-        from os.path import isdir, isfile, join
-        save_dir = join(os.getenv('USERPROFILE'), 'gm3a-data')
-        images = save_dir +"\\images"
-        if os.path.exists(images):
-            pass
-        else:
-            os.mkdir(images) # Make a folder
-            os.system("attrib + h " + images) # Hide the folder
-        old = self.ImagePath
-        name =  os.path.basename(self.ImagePath).split('/')[-1]
-        new = images + f'\\{name}.jpg'
-        if os.path.exists(new):
-            pass
-        else:
-            shutil.copy(old, new)
-            self.ImagePath = new
+        if self.ImagePath:
+            import os
+            import shutil
+            from os.path import isdir, isfile, join
+            save_dir = join(os.getenv('USERPROFILE'), 'gm3a-data')
+            images = save_dir +"\\images"
+            if os.path.exists(images):
+                pass
+            else:
+                os.mkdir(images) # Make a folder
+                os.system("attrib + h " + images) # Hide the folder
+            old = self.ImagePath
+            name =  os.path.basename(self.ImagePath).split('/')[-1]
+            new = images + f'\\{name}.jpg'
+            if os.path.exists(new):
+                pass
+            else:
+                shutil.copy(old, new)
+                self.ImagePath = new
 
     def editItem(self):
         num = self.label_4.text()
@@ -368,6 +374,8 @@ class ProductWidget(QFrame):
                     self.num_sell_2.setText(price_out)
                     self.edit_state = True
                     self.Change.setText( "تعديل")
+                    self.ImagePath = None
+                    
     def removeItemInStore(self):
         from widgets.messageWidget.pyMessageBox import PyMessageBox
 

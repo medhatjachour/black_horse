@@ -11,6 +11,9 @@ class Product(_pydantic.BaseModel):
     num:int
     price_in:int
     price_out:int
+
+    # cat_id: Union[str, None] = None
+    # store_id: Union[str, None] = None
     class Config:
         orm_mode = True
 
@@ -60,5 +63,40 @@ class Sale_item(_pydantic.BaseModel):
     product_id: int
     num_of_products: int
     price_out: int
+    class Config:
+        orm_mode = True
+
+
+class Check(_pydantic.BaseModel):
+    id:int
+    name: Union[str, None] = None
+    phone: Union[str, None] = None
+    address: Union[str, None] = None
+    date: Union[date, None] = None
+    total: Union[int, None] = None
+    paid: Union[int, None] = None
+    class Config:
+        orm_mode = True
+
+class Check_item(_pydantic.BaseModel):
+    id:int
+    check_id: int
+    date: Union[date, None] = None
+    paying: int
+    # status:bool
+    class Config:
+        orm_mode = True
+
+class Store(_pydantic.BaseModel):
+    id:str
+    name: str
+    phone: Union[str, None] = None
+    address: Union[str, None] = None
+    class Config:
+        orm_mode = True
+
+class Cat(_pydantic.BaseModel):
+    id:str
+    name: str
     class Config:
         orm_mode = True

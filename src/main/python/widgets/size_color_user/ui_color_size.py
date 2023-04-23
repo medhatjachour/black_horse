@@ -211,6 +211,14 @@ class SizeAndColor(QFrame):
             self.deleteItem.setVisible(False)
             self.label_disc.setVisible(True)
             self.label_date.setVisible(True)
+        if self._type == "cat":
+            self.Change.setVisible(False)
+            self.deleteItem.clicked.connect(self.deleteCatFun)
+        if self._type == "store":
+            self.Change.setVisible(False)
+            self.label_disc.setVisible(True)
+            self.label_date.setVisible(True)
+            self.deleteItem.clicked.connect(self.deleteStoreFun)
 
     def deleteSizeFun(self):
         deleted_size = _services.delete_size( _database.SessionLocal(),self._id )
@@ -224,6 +232,16 @@ class SizeAndColor(QFrame):
         deleted_user = _services.delete_user( _database.SessionLocal(),self._id )
         # if deleted_user:
         self.setVisible(False)
+    def deleteCatFun(self):
+        deleted_user = _services.delete_cat( _database.SessionLocal(),self._id )
+        # if deleted_user:
+        self.setVisible(False)
+    def deleteStoreFun(self):
+        deleted_user = _services.delete_store( _database.SessionLocal(),self._id )
+        # if deleted_user:
+        self.setVisible(False)
+
+
 
     # setupUi
 

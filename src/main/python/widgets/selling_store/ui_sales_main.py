@@ -22,6 +22,7 @@ class SalesMain(QFrame):
     def __init__(
         self,
         sale,
+        _type,
     ):
         super().__init__()
         self._sale = sale
@@ -125,6 +126,19 @@ class SalesMain(QFrame):
 "background-color: rgb(242, 248, 255);\n"
 "border-bottom:0px;")
 
+        self.lineEdit_link_paid = QPushButton(self.frame_2)
+        self.lineEdit_link_paid.setObjectName(u"lineEdit_link_paid")
+        self.lineEdit_link_paid.setMinimumSize(QSize(0, 0))
+        self.lineEdit_link_paid.setMaximumSize(QSize(70, 16777215))
+        self.lineEdit_link_paid.setCursor(QCursor(Qt.PointingHandCursor))
+        self.lineEdit_link_paid.setStyleSheet(u"/*border: 1px solid #000000;*/\n"
+            "border:0px;\n"
+            "padding: 0px 8px;\n"
+            "background-color: rgb(242, 248, 255);\n"
+            "color: red;\n"
+            "border-bottom:0px;")
+
+        self.horizontalLayout.addWidget(self.lineEdit_link_paid)
         self.horizontalLayout.addWidget(self.lineEdit_link)
 
         self.client_phone = QLabel(self.frame_2)
@@ -185,50 +199,84 @@ class SalesMain(QFrame):
 
 
 
+
+
         self.frame_3.setVisible(False)
         self.showMore.setText( "عرض التفاصيل")
-        self.showMore.clicked.connect(self.show_sale_detail)
-        self.status.setText( str( self._sale.status))
-        self.sale_number.setText( str( self._sale.id))
-
-        if  str(self._sale.status) == "انتظار":
-            
-            self.status.setStyleSheet("border:0px;\n"
-            "color: rgb(255, 255, 255);\n"
-            "background-color:#ff8000;\n"
-            "border-radius:5px;")
-            self.status.setCursor(QCursor(Qt.PointingHandCursor))
-            self.status.clicked.connect(self.refuseOrder)
-            
-        if  str(self._sale.status) == "مرفوض":
-            self.status.setStyleSheet("border:0px;\n"
-            "color:  rgb(255, 255, 255);\n"
-            "background-color:#e80000;\n"
-            "border-radius:5px;")
-        self.client_budget.setText( str( self._sale.total))
-        self.client_date.setText( self._sale.date.strftime("%e %b %Y at %I:%M %p"))
-        if self._sale.link and self._sale.link != "" and self._sale.link != " ":
-            self.lineEdit_link.setText("Copy")
-        else:
-            self.lineEdit_link.setEnabled(False)
-            self.lineEdit_link.setText( "__")
-        self.lineEdit_link.clicked.connect(self.copyLink)
-        if self._sale.phone and self._sale.phone != "" and self._sale.phone != " ":
-            self.client_phone.setText(str( self._sale.phone))
-        else:
-            self.client_phone.setText("__")
-        if self._sale.name and self._sale.name != "" and self._sale.name != " ":
-            self.client_name.setText(str( self._sale.name))
-        else:
-            self.client_name.setText("__")
-        
-        # self.retranslateUi(self)
-        # QtCore.QMetaObject.connectSlotsByName(self)
-        
-        if self._sale.date < (datetime.now() - timedelta(days=20, hours=1)):
-            if self._sale.status == "انتظار":
-                self.acceptOrder()
         self.clicked = True
+        
+        if _type == "sales":
+            self.showMore.clicked.connect(self.show_sale_detail)
+            self.status.setText( str( self._sale.status))
+            self.sale_number.setText( str( self._sale.id))
+
+            if  str(self._sale.status) == "انتظار":
+                
+                self.status.setStyleSheet("border:0px;\n"
+                "color: rgb(255, 255, 255);\n"
+                "background-color:#ff8000;\n"
+                "border-radius:5px;")
+                self.status.setCursor(QCursor(Qt.PointingHandCursor))
+                self.status.clicked.connect(self.refuseOrder)
+                
+            if  str(self._sale.status) == "مرفوض":
+                self.status.setStyleSheet("border:0px;\n"
+                "color:  rgb(255, 255, 255);\n"
+                "background-color:#e80000;\n"
+                "border-radius:5px;")
+            self.client_budget.setText( str( self._sale.total))
+            self.client_date.setText( self._sale.date.strftime("%e %b %Y at %I:%M %p"))
+            if self._sale.link and self._sale.link != "" and self._sale.link != " ":
+                self.lineEdit_link.setText("Copy")
+            else:
+                self.lineEdit_link.setEnabled(False)
+                self.lineEdit_link.setText( "__")
+            self.lineEdit_link.clicked.connect(self.copyLink)
+            if self._sale.phone and self._sale.phone != "" and self._sale.phone != " ":
+                self.client_phone.setText(str( self._sale.phone))
+            else:
+                self.client_phone.setText("__")
+            if self._sale.name and self._sale.name != "" and self._sale.name != " ":
+                self.client_name.setText(str( self._sale.name))
+            else:
+                self.client_name.setText("__")
+            
+            # self.retranslateUi(self)
+            # QtCore.QMetaObject.connectSlotsByName(self)
+            
+            if self._sale.date < (datetime.now() - timedelta(days=20, hours=1)):
+                if self._sale.status == "انتظار":
+                    self.acceptOrder()
+            self.clicked = True
+    
+    
+        elif _type == "checks":
+            self.showMore.clicked.connect(self.show_sale_detail_checks)
+            # self.status.setText( str( self._sale.status))
+            self.sale_number.setText( str( self._sale.id))
+            self.status.setVisible(False)
+            self.client_budget.setText( str( self._sale.address))
+            self.client_budget.setMinimumSize(QSize(270, 38))
+            self.client_date.setText( self._sale.date.strftime("%e %b %Y "))
+            if self._sale.total and self._sale.total != "" and self._sale.total != " ":
+                self.lineEdit_link.setText(str(self._sale.total))
+                self.lineEdit_link_paid.setText(str( self._sale.paid))
+                self.lineEdit_link_paid.setMinimumSize(QSize(70, 38))
+            else:
+                self.lineEdit_link.setEnabled(False)
+                self.lineEdit_link.setText( "__")
+            if self._sale.phone and self._sale.phone != "" and self._sale.phone != " ":
+                self.client_phone.setText(str( self._sale.phone))
+            else:
+                self.client_phone.setText("__")
+            if self._sale.name and self._sale.name != "" and self._sale.name != " ":
+                self.client_name.setText(str( self._sale.name))
+            else:
+                self.client_name.setText("__")
+            # self.retranslateUi(self)
+            # QtCore.QMetaObject.connectSlotsByName(self)
+            
+      
     def clear_tab(self,layout):
         while layout.count():
             child =  layout.takeAt(0)
@@ -280,6 +328,30 @@ class SalesMain(QFrame):
             self.frame_3.setVisible(False)
             self.showMore.setText("عرض التفاصيل")
             self.clicked = True
+    
+    def show_sale_detail_checks(self):
+        from widgets.productWidget.ui_selling import ProductWidget
+        self.clear_tab(self.verticalLayout_2)
+        if self.clicked:
+            self.frame_3.setVisible(True)
+            w = 40
+            checkItems = _services.get_check_items( _database.SessionLocal(), self._sale.id)
+            for i in checkItems:
+                w = w + 40
+                self.verticalLayout_2.addWidget(ProductWidget(i.id, str(i.date), str( i.paying),"","","","","check"))
+
+            self.frame_3.setMinimumSize(850 , w)
+            self.setMinimumSize(850, w + 60)
+            # self.pushButton.setVisible(False)
+            self.showMore.setText("اخفاء")
+            self.clicked = False
+        else:
+            self.frame_3.setMinimumSize(850 ,0)
+            self.setMinimumSize(850, 60)
+            self.frame_3.setVisible(False)
+            self.showMore.setText("عرض التفاصيل")
+            self.clicked = True
+    
     def refuseOrder(self):
         from widgets.messageWidget.pyMessageBox import PyMessageBox
 
