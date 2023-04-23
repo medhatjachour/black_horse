@@ -1154,8 +1154,8 @@ class MainWindow(QMainWindow):
         w = []
         if paid and date:
             
-            from widgets.labelx.ui_alabelX import aLabelX
-            self.ui.verticalLayout_10.addWidget(aLabelX(the_size, "size"))
+            # from widgets.labelx.ui_alabelX import aLabelX
+            # self.ui.verticalLayout_10.addWidget(aLabelX(the_size, "size"))
             w.append(int(paid))
             w.append(date)
             self.remaining.append(w)
