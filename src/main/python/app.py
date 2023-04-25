@@ -86,7 +86,9 @@ class MainWindow(QMainWindow):
         self.ui.gridLayout_3.addWidget(self.removeCart, 0, 0, 1, 1)
 
         self.productsCompleted = []
+        self.clientsCompleted = []
         self.main_completing()
+        self.main_clients_completing()
         self.theSaleProductItem = None
         self.cart = []
         self.showTotal = 0
@@ -106,6 +108,7 @@ class MainWindow(QMainWindow):
         self.skip = 0
         self.limit = 50
         self.ui.pushButton.setVisible(False)
+        self.ui.pushButton_15.setVisible(False)
         self.sizes = []
         self.colors = []
         self.ShowColorsInComboBox()
@@ -148,6 +151,8 @@ class MainWindow(QMainWindow):
         self.remaining = []
         self.ui.add_remaining.clicked.connect(self.addRemaining)
 
+        self.ui.pushButton_15.clicked.connect(self.removeRemaining)
+
         self.showUsers()
         self.showColors()
         self.showSizes()
@@ -155,15 +160,17 @@ class MainWindow(QMainWindow):
         self.showCats()
         self.showChecks()
 
+        self.ShowChecksComboBox()
         self.ShowCatsInComboBox()
         self.ShowStoreInComboBox()
+        self.ui.stackedWidget_5.setCurrentIndex(0)
         # statics
         self.ChartData = [[]]
         self.SeriesNames = []
         self.duration = 1
         self.ui.color_sell_5.currentIndexChanged.connect(self.changeDuration)
         self.ui.color_sell_6.currentIndexChanged.connect(self.passDataToChart)
-        self.ui.pushButton_10.clicked.connect(self.showStatics)
+        self.ui.pushButton_10.clicked.connect(self.showCustomStatics)
         self.ui.pushButton_11.clicked.connect(self.showGard)
         self.ui.pushButton_13.clicked.connect(self.show_daily)
         self.ui.button_patiensts_8.clicked.connect(self.showCharts)
@@ -364,10 +371,20 @@ class MainWindow(QMainWindow):
         )
 
         if PyMessageBox.theStateOfTheMessaheBox(self):
-            path = app_context.get_resource('data/client_secret.json')
-            upload_db(path)
-            self.ui.feedback.setText("uploaded successfully")
-            self.ui.feedback.setStyleSheet(u"color: #10e205;")
+            
+            worker = Worker(
+                partial(
+                    self.start_uploading,
+                )
+            )
+            worker.signals.result.connect(partial(self.resultFunctionUploading))
+            self.threadpool.start(worker)
+    def start_uploading(self, progress_callback):
+        path = app_context.get_resource('data/client_secret.json')
+        upload_db(path)
+    def resultFunctionUploading(self, result):
+        self.ui.feedback.setText("uploaded successfully")
+        self.ui.feedback.setStyleSheet(u"color: #10e205;")
 
     def download(self):
         from widgets.messageWidget.pyMessageBox import PyMessageBox
@@ -382,10 +399,20 @@ class MainWindow(QMainWindow):
         )
 
         if PyMessageBox.theStateOfTheMessaheBox(self):
-            path = app_context.get_resource('data/client_secret.json')
-            download_db(path)
-            self.ui.feedback.setText("downloaded successfully")
-            self.ui.feedback.setStyleSheet(u"color: #10e205;")
+            
+            worker = Worker(
+                partial(
+                    self.start_downloading,
+                )
+            )
+            worker.signals.result.connect(partial(self.resultFunctionDownloading))
+            self.threadpool.start(worker)
+    def start_downloading(self,progress_callback):
+        path = app_context.get_resource('data/client_secret.json')
+        download_db(path)
+    def resultFunctionDownloading(self,request):
+        self.ui.feedback.setText("downloaded successfully")
+        self.ui.feedback.setStyleSheet(u"color: #10e205;")
 
     # ///////////////////////////////////////////////////////////
     def main_completing(self):
@@ -401,6 +428,19 @@ class MainWindow(QMainWindow):
             completer.activated.connect(self.onActivatedChosenProduct)
             self.ui.procut_sell.setCompleter(completer)
             self.ui.add_product.setCompleter(completer)
+
+    def main_clients_completing(self):
+        clients = _services.get_all_sales(_database.SessionLocal())
+        if clients:
+            for i in clients:
+                if i.name in self.clientsCompleted:
+                    pass
+                else:
+                    self.clientsCompleted.append(i.name)
+            completer = QCompleter(self.clientsCompleted)
+
+            completer.activated.connect(self.onActivatedChosenProduct)
+            self.ui.clientname.setCompleter(completer)
 
     def onActivatedChosenProduct(self):
         self.ui.color_sell.clear()
@@ -574,6 +614,7 @@ class MainWindow(QMainWindow):
                     self.clear_tab(self.ui.verticalLayout_12)
                     self.showSalesInSalesStore()
                     self.showProductsInStore()
+                    self.main_clients_completing()
                     self.cart = []
                     self.ui.clientname.setText("")
                     self.ui.phone.setText("")
@@ -620,6 +661,10 @@ class MainWindow(QMainWindow):
         self.ui.feedback.setText(f"removed old selection")
         self.ui.feedback.setStyleSheet(u"color: #00946d;")
         self.ui.pushButton.setVisible(False)
+        
+        self.ui.chose_cat.setCurrentIndex(0)
+        self.ui.chose_store.setCurrentIndex(0)
+        self.ui.chose_check.setCurrentIndex(0)
 
     # colors
     def ShowColorsInComboBox(self):
@@ -720,6 +765,21 @@ class MainWindow(QMainWindow):
         num = self.ui.add_num.text()
         priceIn = self.ui.add_p_in.text()
         priceOut = self.ui.add_p_out.text()
+        cat = self.ui.chose_cat.currentText()
+        if cat and cat != "" and cat != " ":
+            cat = cat 
+        else: 
+            cat = None
+        store = self.ui.chose_store.currentText()
+        if store and store != "" and store != " ":
+            store = store 
+        else: 
+            store = None
+        check = self.ui.chose_check.currentText()
+        if check and check != "" and check != " ":
+            check = check 
+        else: 
+            check = None
         if len(self.sizes) > 0 and len(self.colors) > 0:
             self.ui.enter_store.setText("...adding")
             self.movingImage()
@@ -743,6 +803,9 @@ class MainWindow(QMainWindow):
                                             "price_out": priceOut,
                                             "color": color,
                                             "size": size,
+                                            "cat_id": cat,
+                                            "store_id":store,
+                                            "check_id":check,
                                         }
                                         createProduct = _services.create_Product(
                                             _database.SessionLocal(), payload
@@ -798,6 +861,11 @@ class MainWindow(QMainWindow):
         self.ui.add_p_out.setText("")
         self.ui.color_sell_3.setCurrentIndex(0)
         self.ui.color_sell_4.setCurrentIndex(0)
+        
+        self.ui.chose_cat.setCurrentIndex(0)
+        self.ui.chose_store.setCurrentIndex(0)
+        self.ui.chose_check.setCurrentIndex(0)
+        
         self.clear_tab_except_first(self.ui.verticalLayout_9)
         self.clear_tab_except_first(self.ui.verticalLayout_10)
         if self.namingSearch:
@@ -814,7 +882,15 @@ class MainWindow(QMainWindow):
     def showProductsInStore(self):
         self.ui.enter_store.setText("بحث ")
         self.clear_tab(self.ui.verticalLayout_13)
-        products = _services.get_products_pages(_database.SessionLocal(),self.skip,self.limit)
+        # count = _services.get_products_count(_database.SessionLocal())
+        # if count >  2 * self.limit:
+        #     count = count - self.limit
+        # else:
+        #     count = 0
+        # self.skip = count
+        # self.limit = count
+        products = _services.get_products(_database.SessionLocal())
+        # products = _services.get_products_pages(_database.SessionLocal(),self.skip, self.limit)
         from widgets.productWidget.ui_selling import ProductWidget
         for i in (products[::-1]):
             self.ui.verticalLayout_13.addWidget(
@@ -1154,14 +1230,20 @@ class MainWindow(QMainWindow):
         w = []
         if paid and date:
             
-            # from widgets.labelx.ui_alabelX import aLabelX
-            # self.ui.verticalLayout_10.addWidget(aLabelX(the_size, "size"))
+            from widgets.labelx.ui_alabelX import aLabelX
+            self.ui.verticalLayout_46.addWidget(aLabelX(paid, "check", date))
             w.append(int(paid))
             w.append(date)
             self.remaining.append(w)
             
+            self.ui.pushButton_15.setVisible(True)
         self.ui.remaining.setText("")
-
+    def removeRemaining(self):
+        
+        self.ui.pushButton_15.setVisible(False)
+        self.clear_tab(self.ui.verticalLayout_46)
+        self.remaining = []
+    
     def addChecks(self):
         print(self.remaining)
         name = self.ui.check_name.text()
@@ -1202,6 +1284,9 @@ class MainWindow(QMainWindow):
             self.ui.check_total.setText("")
             self.ui.check_paied.setText("")
             self.showChecks()
+            self.ShowChecksComboBox()
+            self.ui.pushButton_15.setVisible(False)
+            self.clear_tab(self.ui.verticalLayout_46)
         else:
             print("something wrong in adding check")
     
@@ -1218,8 +1303,18 @@ class MainWindow(QMainWindow):
                                             QSizePolicy.Expanding)
         self.ui.verticalLayout_33.addItem(self.vertical_spacer2)
 
+    def ShowChecksComboBox(self):
+
+        self.ui.chose_check.clear()
+        stores = _services.get_checks(_database.SessionLocal())
+        self.ui.chose_check.addItem("")
+        for i in stores:
+            self.ui.chose_check.addItem(i.name)
+
 
     #  /////////////////////////////////////////////////////////// Statics
+
+
     def changeDuration(self):
         text = self.ui.color_sell_5.currentText()
         if text == "last 24 hours":
@@ -1256,7 +1351,7 @@ class MainWindow(QMainWindow):
         priceIn = 0
         output = 0
         theSales = _services.get_all_sales(_database.SessionLocal())
-        
+
         if theSales and text != "Today":
             for sales in theSales:
                 if sales.status != "مرفوض":
@@ -1278,9 +1373,7 @@ class MainWindow(QMainWindow):
             for sales in theOutPut:
                 if sales.date >= (datetime.now() - timedelta(days=int(self.duration))):
                     output += sales.num
-        
 
-                
         if theSales and text == "Today":
             for sales in theSales:
                 if sales.status != "مرفوض":
@@ -1318,6 +1411,101 @@ class MainWindow(QMainWindow):
     
     def resultFunctionStatics(self, result):
         self.ui.pushButton_10.setEnabled(True)
+
+
+
+    
+    def showCustomStatics(self):
+        self.ui.pushButton_10.setEnabled(False)
+        worker = Worker(
+            partial(
+                self.start_custom_statics,
+            )
+        )
+        worker.signals.result.connect(partial(self.resultFunctionCustomStatics))
+        self.threadpool.start(worker)
+
+    def start_custom_statics(self, progress_callback):
+        # text = self.ui.color_sell_5.currentText()
+        theSales = _services.get_all_sales(_database.SessionLocal())
+        num = 0
+        pieces_num = 0
+        total_in = 0
+        total_out = 0
+        real = 0
+        predicted = 0
+        priceIn = 0
+        output = 0
+        theSales = _services.get_all_sales(_database.SessionLocal())
+        
+        start_date = self.ui.dateEdit_3.text()
+        start_date = datetime.strptime(start_date, "%d/%m/%Y")
+        
+        end_date = self.ui.dateEdit_2.text()
+        end_date = datetime.strptime(end_date, "%d/%m/%Y")
+
+        if theSales :
+            for sales in theSales:
+                if sales.status != "مرفوض":
+                    if sales.date >= start_date and sales.date <= end_date:
+                        num = num + 1
+                        total_in = total_in + int(sales.total)
+                        total_out = total_out + int(sales.real_total)
+                        items = _services.get_sales_items(_database.SessionLocal(), sales.id)
+                        for item in items:
+                            pieces_num = pieces_num + int(item.num_of_products)
+                            theProduct = _services.get_product_by_id(_database.SessionLocal(), item.product_id)
+                            if theProduct:
+                                real = real + int(item.price_out)
+                                priceIn = priceIn + int(theProduct.price_in)
+                                predicted = predicted + int(theProduct.price_out)
+
+        theOutPut = _services.get_outputs(_database.SessionLocal())
+        if theOutPut :
+            for sales in theOutPut:
+                if sales.date >= start_date and sales.date <= end_date:
+                    output += sales.num
+
+        # if theSales and text == "Today":
+        #     for sales in theSales:
+        #         if sales.status != "مرفوض":
+        #             if sales.date.date() == datetime.today().date():
+        #                 num = num + 1
+        #                 total_in = total_in + int(sales.total)
+        #                 total_out = total_out + int(sales.real_total)
+        #                 items = _services.get_sales_items(_database.SessionLocal(), sales.id)
+        #                 for item in items:
+        #                     pieces_num = pieces_num + int(item.num_of_products)
+        #                     theProduct = _services.get_product_by_id(_database.SessionLocal(), item.product_id)
+        #                     if theProduct:
+        #                         real = real + int(item.price_out)
+        #                         priceIn = priceIn + int(theProduct.price_in)
+        #                         predicted = predicted + int(theProduct.price_out)
+
+        # theOutPut = _services.get_outputs(_database.SessionLocal())
+        # if theOutPut and text == "Today":
+        #     for sales in theOutPut:
+        #         if sales.date.date() == datetime.today().date():
+        #             output += sales.num
+        
+
+        predictedIncome = int(predicted) - int(priceIn)
+        real = real - int(priceIn)
+        self.ui.label_53.setText(f"{str(num)} n")
+        self.ui.label_65.setText(f"{str(pieces_num)} n")
+        self.ui.label_61.setText(f"{str(total_in)} $")
+        self.ui.label_57.setText(f"{str(real)} $")
+        self.ui.label_63.setText(f"{str(total_out)} $")
+        self.ui.label_59.setText(f"{str(predictedIncome)} $")
+        self.ui.label_67.setText(f"{str(priceIn)} $")
+        self.ui.label_74.setText(f"{str(output)} $")
+        self.ui.label_21.setText(f"{str(real - output)}")
+    
+    def resultFunctionCustomStatics(self, result):
+        self.ui.pushButton_10.setEnabled(True)
+
+
+
 
     def showGard(self):
         self.ui.pushButton_11.setEnabled(False)

@@ -1232,7 +1232,7 @@ border-top-left-radius: 20px;</string>
               <item>
                <widget class="QStackedWidget" name="stackedWidget_2">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>4</number>
                 </property>
                 <widget class="QWidget" name="page_3">
                  <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -3757,7 +3757,7 @@ border-radius: 0px;
                      <item row="0" column="0">
                       <widget class="QStackedWidget" name="stackedWidget_5">
                        <property name="currentIndex">
-                        <number>0</number>
+                        <number>2</number>
                        </property>
                        <widget class="QWidget" name="page_12">
                         <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -5193,7 +5193,40 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                    </widget>
                                   </item>
                                   <item row="2" column="5">
-                                   <widget class="QDateEdit" name="dateEdit"/>
+                                   <widget class="QDateEdit" name="dateEdit">
+                                    <property name="minimumSize">
+                                     <size>
+                                      <width>0</width>
+                                      <height>30</height>
+                                     </size>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">QDateEdit
+{
+	border: 1px solid #ced4da;
+	border-radius:4px;
+	padding-left:10px;
+}
+
+QDateEdit::hover{
+
+	border: 2px solid rgb(103, 222, 255);
+}
+QDateEdit::focus{
+	border: 2px solid rgb(103, 222, 255);
+}</string>
+                                    </property>
+                                    <property name="dateTime">
+                                     <datetime>
+                                      <hour>0</hour>
+                                      <minute>0</minute>
+                                      <second>0</second>
+                                      <year>2023</year>
+                                      <month>1</month>
+                                      <day>1</day>
+                                     </datetime>
+                                    </property>
+                                   </widget>
                                   </item>
                                   <item row="2" column="4">
                                    <widget class="QPushButton" name="add_remaining">
@@ -5543,6 +5576,44 @@ QLineEdit::focus{
                                     </layout>
                                    </widget>
                                   </item>
+                                  <item row="2" column="0">
+                                   <widget class="QPushButton" name="pushButton_15">
+                                    <property name="minimumSize">
+                                     <size>
+                                      <width>126</width>
+                                      <height>39</height>
+                                     </size>
+                                    </property>
+                                    <property name="font">
+                                     <font>
+                                      <pointsize>14</pointsize>
+                                      <bold>false</bold>
+                                     </font>
+                                    </property>
+                                    <property name="cursor">
+                                     <cursorShape>PointingHandCursor</cursorShape>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">QPushButton
+{
+	border:0px;
+	color: rgb(255, 35, 35);
+	border: 2px solid  rgb(255, 35, 35);
+	border-radius:5px
+}
+QPushButton:hover
+{
+	border:0px;
+	background-color: rgb(255, 35, 35);
+	
+	color: #fff;
+}</string>
+                                    </property>
+                                    <property name="text">
+                                     <string>اعادة ادخال</string>
+                                    </property>
+                                   </widget>
+                                  </item>
                                  </layout>
                                 </widget>
                                </item>
@@ -5755,6 +5826,135 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                          <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_17">
+                         <item row="1" column="4">
+                          <widget class="QFrame" name="frame_78">
+                           <property name="maximumSize">
+                            <size>
+                             <width>400</width>
+                             <height>120</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:8px;</string>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                           <layout class="QHBoxLayout" name="horizontalLayout_35">
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <item>
+                             <widget class="QFrame" name="frame_79">
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QGridLayout" name="gridLayout_14">
+                               <property name="topMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>0</number>
+                               </property>
+                               <item row="0" column="2">
+                                <widget class="QLabel" name="label_71">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>صافي الربح</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_78">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">color: rgb(35, 158, 86);</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="2">
+                                <widget class="QLabel" name="label_72">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>المكسب الفعلي</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="0" column="0">
+                                <widget class="QLabel" name="label_21">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>13</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">color: rgb(35, 158, 86);</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item row="0" column="4">
+                          <widget class="QLabel" name="label_68">
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Simplified Arabic</family>
+                             <pointsize>15</pointsize>
+                             <bold>false</bold>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>الاحصاءات</string>
+                           </property>
+                          </widget>
+                         </item>
                          <item row="1" column="2">
                           <widget class="QFrame" name="frame_74">
                            <property name="maximumSize">
@@ -5935,28 +6135,15 @@ QPushButton:hover
                            </layout>
                           </widget>
                          </item>
-                         <item row="1" column="3">
-                          <widget class="QFrame" name="frame_84">
-                           <property name="maximumSize">
-                            <size>
-                             <width>400</width>
-                             <height>120</height>
-                            </size>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:8px;</string>
-                           </property>
+                         <item row="0" column="1">
+                          <widget class="QFrame" name="frame_38">
                            <property name="frameShape">
                             <enum>QFrame::StyledPanel</enum>
                            </property>
                            <property name="frameShadow">
                             <enum>QFrame::Raised</enum>
                            </property>
-                           <layout class="QHBoxLayout" name="horizontalLayout_38">
-                            <property name="spacing">
-                             <number>0</number>
-                            </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_49">
                             <property name="leftMargin">
                              <number>0</number>
                             </property>
@@ -5970,75 +6157,57 @@ border-radius:8px;</string>
                              <number>0</number>
                             </property>
                             <item>
-                             <widget class="QFrame" name="frame_85">
-                              <property name="frameShape">
-                               <enum>QFrame::StyledPanel</enum>
+                             <widget class="QLabel" name="label_20">
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>20</height>
+                               </size>
                               </property>
-                              <property name="frameShadow">
-                               <enum>QFrame::Raised</enum>
+                              <property name="font">
+                               <font>
+                                <pointsize>11</pointsize>
+                               </font>
                               </property>
-                              <layout class="QGridLayout" name="gridLayout_4">
-                               <property name="topMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="bottomMargin">
-                                <number>0</number>
-                               </property>
-                               <item row="0" column="0">
-                                <widget class="QLabel" name="label_67">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">color: rgb(35, 158, 86);</string>
-                                 </property>
-                                 <property name="text">
-                                  <string>TextLabel</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="0" column="1">
-                                <widget class="QLabel" name="label_66">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>المدفوع (من راس المال):</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="2" column="1">
-                                <widget class="QLabel" name="label_73">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>المصروفات</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="2" column="0">
-                                <widget class="QLabel" name="label_74">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">color: rgb(35, 158, 86);</string>
-                                 </property>
-                                 <property name="text">
-                                  <string>TextLabel</string>
-                                 </property>
-                                </widget>
-                               </item>
-                              </layout>
+                              <property name="text">
+                               <string>الي</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QDateEdit" name="dateEdit_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>27</height>
+                               </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">QDateEdit
+{
+	border: 1px solid #ced4da;
+	border-radius:4px;
+	padding-left:10px;
+}
+
+QDateEdit::hover{
+
+	border: 2px solid rgb(103, 222, 255);
+}
+QDateEdit::focus{
+	border: 2px solid rgb(103, 222, 255);
+}</string>
+                              </property>
+                              <property name="dateTime">
+                               <datetime>
+                                <hour>0</hour>
+                                <minute>0</minute>
+                                <second>0</second>
+                                <year>2023</year>
+                                <month>1</month>
+                                <day>1</day>
+                               </datetime>
+                              </property>
                              </widget>
                             </item>
                            </layout>
@@ -6148,6 +6317,84 @@ border-radius:8px;</string>
                                 </widget>
                                </item>
                               </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item row="0" column="2">
+                          <widget class="QFrame" name="frame_63">
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_48">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <item>
+                             <widget class="QLabel" name="label_33">
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777214</width>
+                                <height>20</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <pointsize>11</pointsize>
+                               </font>
+                              </property>
+                              <property name="text">
+                               <string>من</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QDateEdit" name="dateEdit_3">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>27</height>
+                               </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">QDateEdit
+{
+	border: 1px solid #ced4da;
+	border-radius:4px;
+	padding-left:10px;
+}
+
+QDateEdit::hover{
+
+	border: 2px solid rgb(103, 222, 255);
+}
+QDateEdit::focus{
+	border: 2px solid rgb(103, 222, 255);
+}</string>
+                              </property>
+                              <property name="dateTime">
+                               <datetime>
+                                <hour>0</hour>
+                                <minute>0</minute>
+                                <second>0</second>
+                                <year>2023</year>
+                                <month>1</month>
+                                <day>1</day>
+                               </datetime>
+                              </property>
                              </widget>
                             </item>
                            </layout>
@@ -6273,135 +6520,6 @@ border-radius:8px;</string>
                            </layout>
                           </widget>
                          </item>
-                         <item row="1" column="4">
-                          <widget class="QFrame" name="frame_78">
-                           <property name="maximumSize">
-                            <size>
-                             <width>400</width>
-                             <height>120</height>
-                            </size>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:8px;</string>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::StyledPanel</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <layout class="QHBoxLayout" name="horizontalLayout_35">
-                            <property name="spacing">
-                             <number>0</number>
-                            </property>
-                            <property name="leftMargin">
-                             <number>0</number>
-                            </property>
-                            <property name="topMargin">
-                             <number>0</number>
-                            </property>
-                            <property name="rightMargin">
-                             <number>0</number>
-                            </property>
-                            <property name="bottomMargin">
-                             <number>0</number>
-                            </property>
-                            <item>
-                             <widget class="QFrame" name="frame_79">
-                              <property name="frameShape">
-                               <enum>QFrame::StyledPanel</enum>
-                              </property>
-                              <property name="frameShadow">
-                               <enum>QFrame::Raised</enum>
-                              </property>
-                              <layout class="QGridLayout" name="gridLayout_14">
-                               <property name="topMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="bottomMargin">
-                                <number>0</number>
-                               </property>
-                               <item row="0" column="2">
-                                <widget class="QLabel" name="label_71">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>صافي الربح</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="2" column="0">
-                                <widget class="QLabel" name="label_78">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">color: rgb(35, 158, 86);</string>
-                                 </property>
-                                 <property name="text">
-                                  <string>TextLabel</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="2" column="2">
-                                <widget class="QLabel" name="label_72">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>المكسب الفعلي</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="0" column="0">
-                                <widget class="QLabel" name="label_21">
-                                 <property name="font">
-                                  <font>
-                                   <pointsize>13</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">color: rgb(35, 158, 86);</string>
-                                 </property>
-                                 <property name="text">
-                                  <string>TextLabel</string>
-                                 </property>
-                                </widget>
-                               </item>
-                              </layout>
-                             </widget>
-                            </item>
-                           </layout>
-                          </widget>
-                         </item>
-                         <item row="0" column="4">
-                          <widget class="QLabel" name="label_68">
-                           <property name="maximumSize">
-                            <size>
-                             <width>16777215</width>
-                             <height>25</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>Simplified Arabic</family>
-                             <pointsize>15</pointsize>
-                             <bold>false</bold>
-                            </font>
-                           </property>
-                           <property name="text">
-                            <string>الاحصاءات</string>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="0" column="3">
                           <widget class="QComboBox" name="color_sell_5">
                            <property name="minimumSize">
@@ -6458,11 +6576,6 @@ QComboBox QListView::item:selected{
                            </property>
                            <item>
                             <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
                              <string>Today</string>
                             </property>
                            </item>
@@ -6488,15 +6601,28 @@ QComboBox QListView::item:selected{
                            </item>
                           </widget>
                          </item>
-                         <item row="0" column="1">
-                          <widget class="QFrame" name="frame_38">
+                         <item row="1" column="3">
+                          <widget class="QFrame" name="frame_84">
+                           <property name="maximumSize">
+                            <size>
+                             <width>400</width>
+                             <height>120</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:8px;</string>
+                           </property>
                            <property name="frameShape">
                             <enum>QFrame::StyledPanel</enum>
                            </property>
                            <property name="frameShadow">
                             <enum>QFrame::Raised</enum>
                            </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_49">
+                           <layout class="QHBoxLayout" name="horizontalLayout_38">
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
                             <property name="leftMargin">
                              <number>0</number>
                             </property>
@@ -6510,58 +6636,76 @@ QComboBox QListView::item:selected{
                              <number>0</number>
                             </property>
                             <item>
-                             <widget class="QLabel" name="label_20">
-                              <property name="font">
-                               <font>
-                                <pointsize>12</pointsize>
-                               </font>
+                             <widget class="QFrame" name="frame_85">
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
                               </property>
-                              <property name="text">
-                               <string>الي</string>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
                               </property>
+                              <layout class="QGridLayout" name="gridLayout_4">
+                               <property name="topMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>0</number>
+                               </property>
+                               <item row="0" column="0">
+                                <widget class="QLabel" name="label_67">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">color: rgb(35, 158, 86);</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="0" column="1">
+                                <widget class="QLabel" name="label_66">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>المدفوع (من راس المال):</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QLabel" name="label_73">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>المصروفات</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_74">
+                                 <property name="font">
+                                  <font>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">color: rgb(35, 158, 86);</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
                              </widget>
-                            </item>
-                            <item>
-                             <widget class="QDateEdit" name="dateEdit_2"/>
-                            </item>
-                           </layout>
-                          </widget>
-                         </item>
-                         <item row="0" column="2">
-                          <widget class="QFrame" name="frame_63">
-                           <property name="frameShape">
-                            <enum>QFrame::StyledPanel</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_48">
-                            <property name="leftMargin">
-                             <number>0</number>
-                            </property>
-                            <property name="topMargin">
-                             <number>0</number>
-                            </property>
-                            <property name="rightMargin">
-                             <number>0</number>
-                            </property>
-                            <property name="bottomMargin">
-                             <number>0</number>
-                            </property>
-                            <item>
-                             <widget class="QLabel" name="label_33">
-                              <property name="font">
-                               <font>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>من</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QDateEdit" name="dateEdit_3"/>
                             </item>
                            </layout>
                           </widget>

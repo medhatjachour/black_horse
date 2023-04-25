@@ -22,11 +22,14 @@ class aLabelX(QFrame):
     def __init__(
         self,
         text,
-        _type
+        _type,
+        _date = "",
     ):
         super().__init__()
         self._text = text
         self._type = _type
+        self._date = _date
+
         self.resize(94, 22)
         self.setMinimumSize(QSize(0, 21))
         self.setMaximumSize(QSize(16777215, 22))
@@ -66,10 +69,22 @@ class aLabelX(QFrame):
 
         self.verticalLayout.addWidget(self.frame_34)
 
+        self.label_199 = QLabel(self.frame_34)
+        self.label_199.setObjectName(u"label_199")
+        # self.label_199.setGeometry(QRect(0, 0, 120, 20))
+        self.label_199.setStyleSheet(u"border:0px;")
+        self.label_199.setAlignment(Qt.AlignCenter)
+        self.horizontalLayout.addWidget(self.label_199)
+        self.label_199.setVisible(False)
 
         QMetaObject.connectSlotsByName(self)
         self.horizontalLayout.addWidget(self.label_19)
-        self.label_19.setText(self._text)
+        self.label_19.setText(str(self._text))
+        if self._type == "check":
+
+            self.label_199.setVisible(True)
+            self.label_199.setText(str(self._date))
+
         # self.pushButton_9.setText("X")
     #     if self._type == "color":
     #         self.pushButton_9.clicked.connect(self.removeColor)

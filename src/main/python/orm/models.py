@@ -23,8 +23,9 @@ class Product(Base):
     color = Column(String)
     size = Column(String)
     
-    # cat_id = Column(String, nullable=True)
-    # store_id = Column(String, nullable=True)
+    cat_id = Column(String, nullable=True)
+    store_id = Column(String, nullable=True)
+    check_id = Column(Integer, nullable=True)
 
 class Size(Base):
     __tablename__ = "size"

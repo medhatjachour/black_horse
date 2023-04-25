@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainRJxxeM.ui'
+## Form generated from reading UI file 'mainVllIIV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -2934,6 +2934,22 @@ class Ui_MainWindow(object):
 
         self.dateEdit = QDateEdit(self.frame_54)
         self.dateEdit.setObjectName(u"dateEdit")
+        self.dateEdit.setMinimumSize(QSize(0, 30))
+        self.dateEdit.setStyleSheet(u"QDateEdit\n"
+"{\n"
+"	border: 1px solid #ced4da;\n"
+"	border-radius:4px;\n"
+"	padding-left:10px;\n"
+"}\n"
+"\n"
+"QDateEdit::hover{\n"
+"\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}\n"
+"QDateEdit::focus{\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}")
+        self.dateEdit.setDateTime(QDateTime(QDate(2023, 1, 1), QTime(0, 0, 0)))
 
         self.gridLayout_11.addWidget(self.dateEdit, 2, 5, 1, 1)
 
@@ -3129,6 +3145,28 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.frame_69, 3, 5, 1, 3)
 
+        self.pushButton_15 = QPushButton(self.frame_54)
+        self.pushButton_15.setObjectName(u"pushButton_15")
+        self.pushButton_15.setMinimumSize(QSize(126, 39))
+        self.pushButton_15.setFont(font6)
+        self.pushButton_15.setCursor(QCursor(Qt.PointingHandCursor))
+        self.pushButton_15.setStyleSheet(u"QPushButton\n"
+"{\n"
+"	border:0px;\n"
+"	color: rgb(255, 35, 35);\n"
+"	border: 2px solid  rgb(255, 35, 35);\n"
+"	border-radius:5px\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"	border:0px;\n"
+"	background-color: rgb(255, 35, 35);\n"
+"	\n"
+"	color: #fff;\n"
+"}")
+
+        self.gridLayout_11.addWidget(self.pushButton_15, 2, 0, 1, 1)
+
 
         self.verticalLayout_31.addWidget(self.frame_54)
 
@@ -3297,6 +3335,69 @@ class Ui_MainWindow(object):
         self.frame_35.setFrameShadow(QFrame.Raised)
         self.gridLayout_17 = QGridLayout(self.frame_35)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
+        self.frame_78 = QFrame(self.frame_35)
+        self.frame_78.setObjectName(u"frame_78")
+        self.frame_78.setMaximumSize(QSize(400, 120))
+        self.frame_78.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius:8px;")
+        self.frame_78.setFrameShape(QFrame.StyledPanel)
+        self.frame_78.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_35 = QHBoxLayout(self.frame_78)
+        self.horizontalLayout_35.setSpacing(0)
+        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
+        self.horizontalLayout_35.setContentsMargins(0, 0, 0, 0)
+        self.frame_79 = QFrame(self.frame_78)
+        self.frame_79.setObjectName(u"frame_79")
+        self.frame_79.setFrameShape(QFrame.StyledPanel)
+        self.frame_79.setFrameShadow(QFrame.Raised)
+        self.gridLayout_14 = QGridLayout(self.frame_79)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.gridLayout_14.setContentsMargins(-1, 0, -1, 0)
+        self.label_71 = QLabel(self.frame_79)
+        self.label_71.setObjectName(u"label_71")
+        self.label_71.setFont(font4)
+
+        self.gridLayout_14.addWidget(self.label_71, 0, 2, 1, 1)
+
+        self.label_78 = QLabel(self.frame_79)
+        self.label_78.setObjectName(u"label_78")
+        self.label_78.setFont(font4)
+        self.label_78.setStyleSheet(u"color: rgb(35, 158, 86);")
+
+        self.gridLayout_14.addWidget(self.label_78, 2, 0, 1, 1)
+
+        self.label_72 = QLabel(self.frame_79)
+        self.label_72.setObjectName(u"label_72")
+        self.label_72.setFont(font4)
+
+        self.gridLayout_14.addWidget(self.label_72, 2, 2, 1, 1)
+
+        self.label_21 = QLabel(self.frame_79)
+        self.label_21.setObjectName(u"label_21")
+        font9 = QFont()
+        font9.setPointSize(13)
+        self.label_21.setFont(font9)
+        self.label_21.setStyleSheet(u"color: rgb(35, 158, 86);")
+
+        self.gridLayout_14.addWidget(self.label_21, 0, 0, 1, 1)
+
+
+        self.horizontalLayout_35.addWidget(self.frame_79)
+
+
+        self.gridLayout_17.addWidget(self.frame_78, 1, 4, 1, 1)
+
+        self.label_68 = QLabel(self.frame_35)
+        self.label_68.setObjectName(u"label_68")
+        self.label_68.setMaximumSize(QSize(16777215, 25))
+        font10 = QFont()
+        font10.setFamilies([u"Simplified Arabic"])
+        font10.setPointSize(15)
+        font10.setBold(False)
+        self.label_68.setFont(font10)
+
+        self.gridLayout_17.addWidget(self.label_68, 0, 4, 1, 1)
+
         self.frame_74 = QFrame(self.frame_35)
         self.frame_74.setObjectName(u"frame_74")
         self.frame_74.setMaximumSize(QSize(400, 120))
@@ -3386,55 +3487,43 @@ class Ui_MainWindow(object):
 
         self.gridLayout_17.addWidget(self.frame_76, 0, 0, 1, 1)
 
-        self.frame_84 = QFrame(self.frame_35)
-        self.frame_84.setObjectName(u"frame_84")
-        self.frame_84.setMaximumSize(QSize(400, 120))
-        self.frame_84.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius:8px;")
-        self.frame_84.setFrameShape(QFrame.StyledPanel)
-        self.frame_84.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_38 = QHBoxLayout(self.frame_84)
-        self.horizontalLayout_38.setSpacing(0)
-        self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
-        self.horizontalLayout_38.setContentsMargins(0, 0, 0, 0)
-        self.frame_85 = QFrame(self.frame_84)
-        self.frame_85.setObjectName(u"frame_85")
-        self.frame_85.setFrameShape(QFrame.StyledPanel)
-        self.frame_85.setFrameShadow(QFrame.Raised)
-        self.gridLayout_4 = QGridLayout(self.frame_85)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.gridLayout_4.setContentsMargins(-1, 0, -1, 0)
-        self.label_67 = QLabel(self.frame_85)
-        self.label_67.setObjectName(u"label_67")
-        self.label_67.setFont(font4)
-        self.label_67.setStyleSheet(u"color: rgb(35, 158, 86);")
+        self.frame_38 = QFrame(self.frame_35)
+        self.frame_38.setObjectName(u"frame_38")
+        self.frame_38.setFrameShape(QFrame.StyledPanel)
+        self.frame_38.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_49 = QVBoxLayout(self.frame_38)
+        self.verticalLayout_49.setObjectName(u"verticalLayout_49")
+        self.verticalLayout_49.setContentsMargins(0, 0, 0, 0)
+        self.label_20 = QLabel(self.frame_38)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setMaximumSize(QSize(16777215, 20))
+        self.label_20.setFont(font3)
 
-        self.gridLayout_4.addWidget(self.label_67, 0, 0, 1, 1)
+        self.verticalLayout_49.addWidget(self.label_20)
 
-        self.label_66 = QLabel(self.frame_85)
-        self.label_66.setObjectName(u"label_66")
-        self.label_66.setFont(font4)
+        self.dateEdit_2 = QDateEdit(self.frame_38)
+        self.dateEdit_2.setObjectName(u"dateEdit_2")
+        self.dateEdit_2.setMinimumSize(QSize(0, 27))
+        self.dateEdit_2.setStyleSheet(u"QDateEdit\n"
+"{\n"
+"	border: 1px solid #ced4da;\n"
+"	border-radius:4px;\n"
+"	padding-left:10px;\n"
+"}\n"
+"\n"
+"QDateEdit::hover{\n"
+"\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}\n"
+"QDateEdit::focus{\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}")
+        self.dateEdit_2.setDateTime(QDateTime(QDate(2023, 1, 1), QTime(0, 0, 0)))
 
-        self.gridLayout_4.addWidget(self.label_66, 0, 1, 1, 1)
-
-        self.label_73 = QLabel(self.frame_85)
-        self.label_73.setObjectName(u"label_73")
-        self.label_73.setFont(font4)
-
-        self.gridLayout_4.addWidget(self.label_73, 2, 1, 1, 1)
-
-        self.label_74 = QLabel(self.frame_85)
-        self.label_74.setObjectName(u"label_74")
-        self.label_74.setFont(font4)
-        self.label_74.setStyleSheet(u"color: rgb(35, 158, 86);")
-
-        self.gridLayout_4.addWidget(self.label_74, 2, 0, 1, 1)
+        self.verticalLayout_49.addWidget(self.dateEdit_2)
 
 
-        self.horizontalLayout_38.addWidget(self.frame_85)
-
-
-        self.gridLayout_17.addWidget(self.frame_84, 1, 3, 1, 1)
+        self.gridLayout_17.addWidget(self.frame_38, 0, 1, 1, 1)
 
         self.frame_72 = QFrame(self.frame_35)
         self.frame_72.setObjectName(u"frame_72")
@@ -3486,6 +3575,44 @@ class Ui_MainWindow(object):
 
         self.gridLayout_17.addWidget(self.frame_72, 1, 1, 1, 1)
 
+        self.frame_63 = QFrame(self.frame_35)
+        self.frame_63.setObjectName(u"frame_63")
+        self.frame_63.setFrameShape(QFrame.StyledPanel)
+        self.frame_63.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_48 = QVBoxLayout(self.frame_63)
+        self.verticalLayout_48.setObjectName(u"verticalLayout_48")
+        self.verticalLayout_48.setContentsMargins(0, 0, 0, 0)
+        self.label_33 = QLabel(self.frame_63)
+        self.label_33.setObjectName(u"label_33")
+        self.label_33.setMaximumSize(QSize(16777214, 20))
+        self.label_33.setFont(font3)
+
+        self.verticalLayout_48.addWidget(self.label_33)
+
+        self.dateEdit_3 = QDateEdit(self.frame_63)
+        self.dateEdit_3.setObjectName(u"dateEdit_3")
+        self.dateEdit_3.setMinimumSize(QSize(0, 27))
+        self.dateEdit_3.setStyleSheet(u"QDateEdit\n"
+"{\n"
+"	border: 1px solid #ced4da;\n"
+"	border-radius:4px;\n"
+"	padding-left:10px;\n"
+"}\n"
+"\n"
+"QDateEdit::hover{\n"
+"\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}\n"
+"QDateEdit::focus{\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}")
+        self.dateEdit_3.setDateTime(QDateTime(QDate(2023, 1, 1), QTime(0, 0, 0)))
+
+        self.verticalLayout_48.addWidget(self.dateEdit_3)
+
+
+        self.gridLayout_17.addWidget(self.frame_63, 0, 2, 1, 1)
+
         self.frame_37 = QFrame(self.frame_35)
         self.frame_37.setObjectName(u"frame_37")
         self.frame_37.setMaximumSize(QSize(400, 120))
@@ -3499,9 +3626,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_25.setContentsMargins(0, 0, 0, 0)
         self.frame_52 = QFrame(self.frame_37)
         self.frame_52.setObjectName(u"frame_52")
-        font9 = QFont()
-        font9.setPointSize(9)
-        self.frame_52.setFont(font9)
+        font11 = QFont()
+        font11.setPointSize(9)
+        self.frame_52.setFont(font11)
         self.frame_52.setFrameShape(QFrame.StyledPanel)
         self.frame_52.setFrameShadow(QFrame.Raised)
         self.gridLayout_8 = QGridLayout(self.frame_52)
@@ -3539,71 +3666,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_17.addWidget(self.frame_37, 1, 0, 1, 1)
 
-        self.frame_78 = QFrame(self.frame_35)
-        self.frame_78.setObjectName(u"frame_78")
-        self.frame_78.setMaximumSize(QSize(400, 120))
-        self.frame_78.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius:8px;")
-        self.frame_78.setFrameShape(QFrame.StyledPanel)
-        self.frame_78.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_35 = QHBoxLayout(self.frame_78)
-        self.horizontalLayout_35.setSpacing(0)
-        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
-        self.horizontalLayout_35.setContentsMargins(0, 0, 0, 0)
-        self.frame_79 = QFrame(self.frame_78)
-        self.frame_79.setObjectName(u"frame_79")
-        self.frame_79.setFrameShape(QFrame.StyledPanel)
-        self.frame_79.setFrameShadow(QFrame.Raised)
-        self.gridLayout_14 = QGridLayout(self.frame_79)
-        self.gridLayout_14.setObjectName(u"gridLayout_14")
-        self.gridLayout_14.setContentsMargins(-1, 0, -1, 0)
-        self.label_71 = QLabel(self.frame_79)
-        self.label_71.setObjectName(u"label_71")
-        self.label_71.setFont(font4)
-
-        self.gridLayout_14.addWidget(self.label_71, 0, 2, 1, 1)
-
-        self.label_78 = QLabel(self.frame_79)
-        self.label_78.setObjectName(u"label_78")
-        self.label_78.setFont(font4)
-        self.label_78.setStyleSheet(u"color: rgb(35, 158, 86);")
-
-        self.gridLayout_14.addWidget(self.label_78, 2, 0, 1, 1)
-
-        self.label_72 = QLabel(self.frame_79)
-        self.label_72.setObjectName(u"label_72")
-        self.label_72.setFont(font4)
-
-        self.gridLayout_14.addWidget(self.label_72, 2, 2, 1, 1)
-
-        self.label_21 = QLabel(self.frame_79)
-        self.label_21.setObjectName(u"label_21")
-        font10 = QFont()
-        font10.setPointSize(13)
-        self.label_21.setFont(font10)
-        self.label_21.setStyleSheet(u"color: rgb(35, 158, 86);")
-
-        self.gridLayout_14.addWidget(self.label_21, 0, 0, 1, 1)
-
-
-        self.horizontalLayout_35.addWidget(self.frame_79)
-
-
-        self.gridLayout_17.addWidget(self.frame_78, 1, 4, 1, 1)
-
-        self.label_68 = QLabel(self.frame_35)
-        self.label_68.setObjectName(u"label_68")
-        self.label_68.setMaximumSize(QSize(16777215, 25))
-        font11 = QFont()
-        font11.setFamilies([u"Simplified Arabic"])
-        font11.setPointSize(15)
-        font11.setBold(False)
-        self.label_68.setFont(font11)
-
-        self.gridLayout_17.addWidget(self.label_68, 0, 4, 1, 1)
-
         self.color_sell_5 = QComboBox(self.frame_35)
-        self.color_sell_5.addItem("")
         self.color_sell_5.addItem("")
         self.color_sell_5.addItem("")
         self.color_sell_5.addItem("")
@@ -3652,47 +3715,55 @@ class Ui_MainWindow(object):
 
         self.gridLayout_17.addWidget(self.color_sell_5, 0, 3, 1, 1)
 
-        self.frame_38 = QFrame(self.frame_35)
-        self.frame_38.setObjectName(u"frame_38")
-        self.frame_38.setFrameShape(QFrame.StyledPanel)
-        self.frame_38.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_49 = QVBoxLayout(self.frame_38)
-        self.verticalLayout_49.setObjectName(u"verticalLayout_49")
-        self.verticalLayout_49.setContentsMargins(0, 0, 0, 0)
-        self.label_20 = QLabel(self.frame_38)
-        self.label_20.setObjectName(u"label_20")
-        self.label_20.setFont(font4)
+        self.frame_84 = QFrame(self.frame_35)
+        self.frame_84.setObjectName(u"frame_84")
+        self.frame_84.setMaximumSize(QSize(400, 120))
+        self.frame_84.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius:8px;")
+        self.frame_84.setFrameShape(QFrame.StyledPanel)
+        self.frame_84.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_38 = QHBoxLayout(self.frame_84)
+        self.horizontalLayout_38.setSpacing(0)
+        self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
+        self.horizontalLayout_38.setContentsMargins(0, 0, 0, 0)
+        self.frame_85 = QFrame(self.frame_84)
+        self.frame_85.setObjectName(u"frame_85")
+        self.frame_85.setFrameShape(QFrame.StyledPanel)
+        self.frame_85.setFrameShadow(QFrame.Raised)
+        self.gridLayout_4 = QGridLayout(self.frame_85)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(-1, 0, -1, 0)
+        self.label_67 = QLabel(self.frame_85)
+        self.label_67.setObjectName(u"label_67")
+        self.label_67.setFont(font4)
+        self.label_67.setStyleSheet(u"color: rgb(35, 158, 86);")
 
-        self.verticalLayout_49.addWidget(self.label_20)
+        self.gridLayout_4.addWidget(self.label_67, 0, 0, 1, 1)
 
-        self.dateEdit_2 = QDateEdit(self.frame_38)
-        self.dateEdit_2.setObjectName(u"dateEdit_2")
+        self.label_66 = QLabel(self.frame_85)
+        self.label_66.setObjectName(u"label_66")
+        self.label_66.setFont(font4)
 
-        self.verticalLayout_49.addWidget(self.dateEdit_2)
+        self.gridLayout_4.addWidget(self.label_66, 0, 1, 1, 1)
 
+        self.label_73 = QLabel(self.frame_85)
+        self.label_73.setObjectName(u"label_73")
+        self.label_73.setFont(font4)
 
-        self.gridLayout_17.addWidget(self.frame_38, 0, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.label_73, 2, 1, 1, 1)
 
-        self.frame_63 = QFrame(self.frame_35)
-        self.frame_63.setObjectName(u"frame_63")
-        self.frame_63.setFrameShape(QFrame.StyledPanel)
-        self.frame_63.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_48 = QVBoxLayout(self.frame_63)
-        self.verticalLayout_48.setObjectName(u"verticalLayout_48")
-        self.verticalLayout_48.setContentsMargins(0, 0, 0, 0)
-        self.label_33 = QLabel(self.frame_63)
-        self.label_33.setObjectName(u"label_33")
-        self.label_33.setFont(font4)
+        self.label_74 = QLabel(self.frame_85)
+        self.label_74.setObjectName(u"label_74")
+        self.label_74.setFont(font4)
+        self.label_74.setStyleSheet(u"color: rgb(35, 158, 86);")
 
-        self.verticalLayout_48.addWidget(self.label_33)
-
-        self.dateEdit_3 = QDateEdit(self.frame_63)
-        self.dateEdit_3.setObjectName(u"dateEdit_3")
-
-        self.verticalLayout_48.addWidget(self.dateEdit_3)
+        self.gridLayout_4.addWidget(self.label_74, 2, 0, 1, 1)
 
 
-        self.gridLayout_17.addWidget(self.frame_63, 0, 2, 1, 1)
+        self.horizontalLayout_38.addWidget(self.frame_85)
+
+
+        self.gridLayout_17.addWidget(self.frame_84, 1, 3, 1, 1)
 
 
         self.verticalLayout_23.addWidget(self.frame_35)
@@ -4287,7 +4358,7 @@ class Ui_MainWindow(object):
         self.pushButton_13 = QPushButton(self.frame_81)
         self.pushButton_13.setObjectName(u"pushButton_13")
         self.pushButton_13.setMaximumSize(QSize(16777215, 30))
-        self.pushButton_13.setFont(font10)
+        self.pushButton_13.setFont(font9)
         self.pushButton_13.setCursor(QCursor(Qt.PointingHandCursor))
         self.pushButton_13.setStyleSheet(u"color: rgb(230, 126, 34);")
 
@@ -4362,7 +4433,7 @@ class Ui_MainWindow(object):
         self.pushButton_11 = QPushButton(self.frame_82)
         self.pushButton_11.setObjectName(u"pushButton_11")
         self.pushButton_11.setMaximumSize(QSize(16777215, 30))
-        self.pushButton_11.setFont(font10)
+        self.pushButton_11.setFont(font9)
         self.pushButton_11.setCursor(QCursor(Qt.PointingHandCursor))
         self.pushButton_11.setStyleSheet(u"color: rgb(230, 126, 34);")
 
@@ -4522,8 +4593,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.stackedWidget_2.setCurrentIndex(0)
-        self.stackedWidget_5.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(4)
+        self.stackedWidget_5.setCurrentIndex(2)
         self.stackedWidget_4.setCurrentIndex(0)
         self.stackedWidget_3.setCurrentIndex(0)
 
@@ -4616,37 +4687,37 @@ class Ui_MainWindow(object):
         self.check_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u0633\u0645", None))
         self.check_total.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u062c\u0645\u0627\u0644\u064a ", None))
         self.check_phone.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0631\u0642\u0645 \u0627\u0644\u062a\u0644\u0641\u0648\u0646", None))
-        self.label_62.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0628\u064a\u0639 \u0627\u0644\u0645\u062a\u0648\u0642\u0639", None))
-        self.label_58.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0643\u0633\u0628 \u0627\u0644\u0645\u062a\u0648\u0642\u0639", None))
-        self.label_63.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_59.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"\u062a\u062d\u062f\u064a\u062b", None))
-        self.label_67.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_66.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u062f\u0641\u0648\u0639 (\u0645\u0646 \u0631\u0627\u0633 \u0627\u0644\u0645\u0627\u0644):", None))
-        self.label_73.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0635\u0631\u0648\u0641\u0627\u062a", None))
-        self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_60.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0628\u064a\u0639 \u0627\u0644\u0641\u0639\u0644\u064a", None))
-        self.label_56.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0643\u0633\u0628 \u0627\u0644\u0641\u0639\u0644\u064a", None))
-        self.label_57.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_61.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_64.setText(QCoreApplication.translate("MainWindow", u"\u0639\u062f\u062f \u0627\u0644\u0642\u0637\u0639", None))
-        self.label_52.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u0648\u0631\u062f\u0627\u0631\u0627\u062a", None))
-        self.label_53.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_65.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.pushButton_15.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0639\u0627\u062f\u0629 \u0627\u062f\u062e\u0627\u0644", None))
         self.label_71.setText(QCoreApplication.translate("MainWindow", u"\u0635\u0627\u0641\u064a \u0627\u0644\u0631\u0628\u062d", None))
         self.label_78.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_72.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0643\u0633\u0628 \u0627\u0644\u0641\u0639\u0644\u064a", None))
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_68.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u062d\u0635\u0627\u0621\u0627\u062a", None))
-        self.color_sell_5.setItemText(0, "")
-        self.color_sell_5.setItemText(1, QCoreApplication.translate("MainWindow", u"Today", None))
-        self.color_sell_5.setItemText(2, QCoreApplication.translate("MainWindow", u"last 7 days", None))
-        self.color_sell_5.setItemText(3, QCoreApplication.translate("MainWindow", u"last 30 days", None))
-        self.color_sell_5.setItemText(4, QCoreApplication.translate("MainWindow", u"last year", None))
-        self.color_sell_5.setItemText(5, QCoreApplication.translate("MainWindow", u"all the time", None))
-
+        self.label_62.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0628\u064a\u0639 \u0627\u0644\u0645\u062a\u0648\u0642\u0639", None))
+        self.label_58.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0643\u0633\u0628 \u0627\u0644\u0645\u062a\u0648\u0642\u0639", None))
+        self.label_63.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_59.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"\u062a\u062d\u062f\u064a\u062b", None))
         self.label_20.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u064a", None))
+        self.label_60.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0628\u064a\u0639 \u0627\u0644\u0641\u0639\u0644\u064a", None))
+        self.label_56.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0643\u0633\u0628 \u0627\u0644\u0641\u0639\u0644\u064a", None))
+        self.label_57.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_61.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_33.setText(QCoreApplication.translate("MainWindow", u"\u0645\u0646", None))
+        self.label_64.setText(QCoreApplication.translate("MainWindow", u"\u0639\u062f\u062f \u0627\u0644\u0642\u0637\u0639", None))
+        self.label_52.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u0648\u0631\u062f\u0627\u0631\u0627\u062a", None))
+        self.label_53.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_65.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.color_sell_5.setItemText(0, QCoreApplication.translate("MainWindow", u"Today", None))
+        self.color_sell_5.setItemText(1, QCoreApplication.translate("MainWindow", u"last 7 days", None))
+        self.color_sell_5.setItemText(2, QCoreApplication.translate("MainWindow", u"last 30 days", None))
+        self.color_sell_5.setItemText(3, QCoreApplication.translate("MainWindow", u"last year", None))
+        self.color_sell_5.setItemText(4, QCoreApplication.translate("MainWindow", u"all the time", None))
+
+        self.label_67.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_66.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u062f\u0641\u0648\u0639 (\u0645\u0646 \u0631\u0627\u0633 \u0627\u0644\u0645\u0627\u0644):", None))
+        self.label_73.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0635\u0631\u0648\u0641\u0627\u062a", None))
+        self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.button_patiensts_8.setText(QCoreApplication.translate("MainWindow", u"    Charts", None))
         self.button_patiensts_9.setText(QCoreApplication.translate("MainWindow", u"  outCome", None))
         self.color_sell_6.setItemText(0, "")

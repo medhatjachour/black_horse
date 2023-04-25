@@ -50,9 +50,12 @@ def create_Product(db: _orm.Session, product: _schemas.Product):
 def get_products(db: _orm.Session):
     return db.query(_models.Product).all()
 
+def get_products_count(db: _orm.Session):
+    return db.query(_models.Product).count()
+
 def get_products_pages(db: _orm.Session, skip:int, limit:int):
     # return db.query(_models.Product).offset(skip).limit(limit).all()
-    return db.query(_models.Product).order_by(_models.Product.id.desc()).offset(skip).limit(limit).all()
+    return db.query(_models.Product).offset(skip).limit(limit).all()
     # users.select().order_by(users.c.id.desc()).limit(5)
     # return db.query(_models.Product).all()[-limit]
 
