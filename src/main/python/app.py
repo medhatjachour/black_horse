@@ -35,7 +35,7 @@ class MainWindow(QMainWindow):
         # self.show()      
         self.namingSearch = False
         self.threadpool = QThreadPool()
-
+        self.message = "في Brova \n يسعدنا استقبالك و سنسعد بزيارتكم مجددا"
         
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.ui.frame_8.setVisible(False)
@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget_2.setCurrentIndex(0)
         self.someInit()
         self.ui.stackedWidget_4.setCurrentIndex(0)
-
+        
         # top par
         self.toggle_full_screen()
         self.ui.pushButton_3.clicked.connect(self.close_fun)
@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         self.ui.button_patiensts_4.clicked.connect(self.set_right_settings)
         self.ui.addToCart_3.clicked.connect(self.upload_fun)
         self.ui.pushButton_12.clicked.connect(self.download)
-        
+        self.ui.addToCart_4.clicked.connect(self.update_message)
         # operation Sale
         self.removeCart = QPushButton(self.ui.frame)
         self.removeCart.setObjectName(u"removeCart")
@@ -90,6 +90,7 @@ class MainWindow(QMainWindow):
         self.main_completing()
         self.main_clients_completing()
         self.theSaleProductItem = None
+        self.doneSale = False
         self.cart = []
         self.showTotal = 0
         self.ui.procut_sell.returnPressed.connect(self.onActivatedChosenProduct)
@@ -104,6 +105,7 @@ class MainWindow(QMainWindow):
 
         self.ui.done_sell.clicked.connect(self.doneSellCart)
         # store
+        self.page_num = 0
         self.ImagePath = None
         self.skip = 0
         self.limit = 50
@@ -129,6 +131,9 @@ class MainWindow(QMainWindow):
         self.ui.color_sell_2.addItem("اللنك")
         self.showSalesInSalesStore()
         self.ui.search.clicked.connect(self.searchInSalesStore)
+        self.ui.nextPage.clicked.connect(self.nextPageFun)
+        self.ui.PreviousPage.clicked.connect(self.previousPageFun)
+       
         # settings 
         
         self.ui.button_patiensts_15.clicked.connect(self.set_a_page)
@@ -212,7 +217,9 @@ class MainWindow(QMainWindow):
         self.ui.check_paied.setValidator(only_num_)
         self.ui.check_total.setValidator(only_num_)
         self.ui.remaining.setValidator(only_num_)
-    
+
+        self.ui.textEdit.setText(self.message)
+
     def showMinimized(self) -> None:
         return super().showMinimized()
 
@@ -413,7 +420,11 @@ class MainWindow(QMainWindow):
     def resultFunctionDownloading(self,request):
         self.ui.feedback.setText("downloaded successfully")
         self.ui.feedback.setStyleSheet(u"color: #10e205;")
-
+    
+    def update_message(self):
+        self.message = self.ui.textEdit.toPlainText()
+        # print(self.message)
+        self.ui.textEdit.setText(self.message)
     # ///////////////////////////////////////////////////////////
     def main_completing(self):
         the_products = _services.get_products(_database.SessionLocal())
@@ -544,6 +555,18 @@ class MainWindow(QMainWindow):
     def doneSellCart(self):
         name = self.ui.clientname.text()
         phone = self.ui.phone.text()
+
+        worker = Worker(
+            partial(
+                self.start_selling,
+            )
+        )
+        worker.signals.result.connect(partial(self.resultFunctionSelling,phone,name))
+        self.threadpool.start(worker)
+    
+    def start_selling(self,progress_callback):
+        name = self.ui.clientname.text()
+        phone = self.ui.phone.text()
         link = self.ui.Link.text()
         date = datetime.now()
         total = 0
@@ -593,43 +616,98 @@ class MainWindow(QMainWindow):
                     _database.SessionLocal(), sale_id, total, real_total
                 )
                 if finish_sale:
-                    # if phone:
-                    #     pass
-                        
-                        # #TODO: needs another thread
-                        # import pywhatkit as pwk
-                        # phone = str("+20" + str(phone))
-                        # print(phone) 
-                        # # using Exception Handling to avoid unexpected errors
-                        # print(date.year, date.month, date.day, date.hour, date.minute, date.second)
-                        # try:
-                        #     # sending message in Whatsapp in India so using Indian dial code (+20)
-                        #     pwk.sendwhatmsg(phone, "Hi, how are you?", int(date.hour), int(date.minute))
-                        #     print("Message Sent!") #Prints success message in console
-                        #     # error message
-                        # except: 
-                        #     print("Error in sending the message")
-
-                    # refresh store and refresh the sales
-                    self.clear_tab(self.ui.verticalLayout_12)
-                    self.showSalesInSalesStore()
-                    self.showProductsInStore()
-                    self.main_clients_completing()
-                    self.cart = []
-                    self.ui.clientname.setText("")
-                    self.ui.phone.setText("")
-                    self.ui.Link.setText("")
-                    self.showTotal = 0
-                    self.ui.final_price.setText(str(self.showTotal))
-                    self.ui.feedback.setText("successfully completed sale")
-                    self.ui.feedback.setStyleSheet(u"color: #00946d;")
+                    self.doneSale = finish_sale
+        #             # refresh store and refresh the sales
+        #             self.clear_tab(self.ui.verticalLayout_12)
+        #             self.showSalesInSalesStore()
+        #             self.showProductsInStore()
+        #             self.main_clients_completing()
+        #             self.cart = []
+        #             self.ui.clientname.setText("")
+        #             self.ui.phone.setText("")
+        #             self.ui.Link.setText("")
+        #             self.showTotal = 0
+        #             self.ui.final_price.setText(str(self.showTotal))
+        #             self.ui.feedback.setText("successfully completed sale")
+        #             self.ui.feedback.setStyleSheet(u"color: #00946d;")
+        #             if phone:
+        #                 # pass
+        #                 worker = Worker(
+        #                     partial(
+        #                         self.start_whatsapp,
+        #                         phone,
+        #                         name
+        #                     )
+        #                 )
+        #                 worker.signals.result.connect(partial(self.resultFunctionWhatsapp))
+        #                 self.threadpool.start(worker)
+        # else:
+        #     self.ui.feedback.setText("please add items to cart")
+        #     self.ui.feedback.setStyleSheet(u"color: #ff0000;")
+    
+    def resultFunctionSelling(self,phone,name,result):
+        if self.doneSale:
+            self.doneSale = False
+            # refresh store and refresh the sales
+            self.clear_tab(self.ui.verticalLayout_12)
+            self.showSalesInSalesStore()
+            self.showProductsInStore()
+            self.main_clients_completing()
+            self.cart = []
+            self.ui.clientname.setText("")
+            self.ui.phone.setText("")
+            self.ui.Link.setText("")
+            self.showTotal = 0
+            self.ui.final_price.setText(str(self.showTotal))
+            self.ui.feedback.setText("successfully completed sale")
+            self.ui.feedback.setStyleSheet(u"color: #00946d;")
+            if phone:
+                # pass
+                worker = Worker(
+                    partial(
+                        self.start_whatsapp,
+                        phone,
+                        name
+                    )
+                )
+                worker.signals.result.connect(partial(self.resultFunctionWhatsapp))
+                self.threadpool.start(worker)
         else:
             self.ui.feedback.setText("please add items to cart")
             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
+
         self.ui.done_sell.setText("اتمام العملية")
         self.ui.done_sell.setEnabled(True)
         self.ui.addToCart.setText("ادخال")
         self.ui.addToCart.setEnabled(True)
+
+
+    def start_whatsapp(self ,phone,name,progress_callback ) :
+        
+        date_w = datetime.now()
+        #TODO: needs another thread
+        import pywhatkit as pwk
+        phone = str("+20" + str(phone))
+        print(date_w.hour)
+        print(date_w.minute)
+        try:
+            # sending message in Whatsapp in India so using Indian dial code (+20)
+            pwk.sendwhatmsg(phone, f"مرحبا بك {name} {self.message}", int(date_w.hour), int(date_w.minute) + 1)
+            # print("Message Sent!") #Prints success message in console
+        except: 
+            from widgets.messageWidget.pyMessageBox import PyMessageBox
+            PyMessageBox(
+                323,
+                176,
+                " تنبيه",
+                " خظأ ما",
+                " شئ خاطئ حدث اثناء ارسال رسالة واتساب يرجي التأكد ان الواتساب ويب يعمل و ان الرقم صحيح",
+                "تم",
+                "الغاء"
+            )
+
+    def resultFunctionWhatsapp(self, result):
+        pass
 
     def removeCartFun(self):
         self.clear_tab(self.ui.verticalLayout_12)
@@ -753,6 +831,8 @@ class MainWindow(QMainWindow):
                 os.system("attrib + h " + images) # Hide the folder
             old = self.ImagePath
             name =  os.path.basename(self.ImagePath).split('/')[-1]
+            name , ext = os.path.splitext(name)
+            # print(name)
             new = images + f'\\{name}.jpg'
             if os.path.exists(new):
                 pass
@@ -787,6 +867,7 @@ class MainWindow(QMainWindow):
                 for color in self.colors:
                     TheProductExists = _services.get_product(_database.SessionLocal(), name, color, size)
                     if TheProductExists:
+                        updatedProduct = _services.update_product(_database.SessionLocal(),TheProductExists.id ,str(int( TheProductExists.num) + int(num) ) ,priceIn , priceOut, self.ImagePath)
                         self.ui.feedback.setText(f"the product with {name} ,{color}, {size} already exists")
                         self.ui.feedback.setStyleSheet(u"color: #ff0000;")
                     else:
@@ -882,15 +963,20 @@ class MainWindow(QMainWindow):
     def showProductsInStore(self):
         self.ui.enter_store.setText("بحث ")
         self.clear_tab(self.ui.verticalLayout_13)
-        # count = _services.get_products_count(_database.SessionLocal())
-        # if count >  2 * self.limit:
-        #     count = count - self.limit
-        # else:
-        #     count = 0
-        # self.skip = count
+        count = _services.get_products_count(_database.SessionLocal())
+        self.ui.lineEdit.setText(f'{str(count)} item')
+        self.ui.lineEdit.setMaximumWidth(100)
+        self.ui.lineEdit.setReadOnly(True)
+        if count >  2 * self.limit:
+            count = count - self.limit
+        else:
+            count = 0
+        self.page_num = self.page_num + 1
+        self.ui.page_num.setText(str(self.page_num))
+        self.skip = count
         # self.limit = count
         products = _services.get_products(_database.SessionLocal())
-        # products = _services.get_products_pages(_database.SessionLocal(),self.skip, self.limit)
+        products = _services.get_products_pages(_database.SessionLocal(),self.skip, self.limit)
         from widgets.productWidget.ui_selling import ProductWidget
         for i in (products[::-1]):
             self.ui.verticalLayout_13.addWidget(
@@ -914,6 +1000,61 @@ class MainWindow(QMainWindow):
                                             QSizePolicy.Expanding)
         self.ui.verticalLayout_13.addItem(self.vertical_spacer2)
 
+    def nextPageFun(self):
+        self.ui.enter_store.setText("بحث ")
+        self.clear_tab(self.ui.verticalLayout_13)
+        self.ui.nextPage.setVisible(False)
+        self.ui.PreviousPage.setVisible(False)
+        # count = _services.get_products_count(_database.SessionLocal())
+        self.skip = self.skip - 50
+        if self.skip >  2 * self.limit:
+            self.skip = self.skip - self.limit
+            self.page_num = self.page_num + 1
+        else:
+            self.skip = 0
+        self.ui.page_num.setText(str(self.page_num))
+        # self.skip = count
+        # self.limit = count
+        products = _services.get_products(_database.SessionLocal())
+        products = _services.get_products_pages(_database.SessionLocal(),self.skip, self.limit)
+        from widgets.productWidget.ui_selling import ProductWidget
+        for i in (products[::-1]):
+            self.ui.verticalLayout_13.addWidget(
+                ProductWidget(i.id, i.name, i.size, i.color, i.num, i.price_in, i.price_out, "store", i.file_path))
+        self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
+                                            QSizePolicy.Expanding)
+        self.ui.verticalLayout_13.addItem(self.vertical_spacer2)
+        self.ui.nextPage.setVisible(True)
+        self.ui.PreviousPage.setVisible(True)
+    
+    def previousPageFun(self):
+
+        # self.setCursor(QCursor(Qt.ForbiddenCursor))
+        self.ui.enter_store.setText("بحث ")
+        self.clear_tab(self.ui.verticalLayout_13)
+        self.ui.nextPage.setVisible(False)
+        self.ui.PreviousPage.setVisible(False)
+        # count = _services.get_products_count(_database.SessionLocal())
+        self.skip = self.skip + 50
+        if self.skip >  2 * self.limit:
+            self.skip = self.skip - self.limit
+            self.page_num = self.page_num - 1
+        else:
+            self.skip = 0
+        self.ui.page_num.setText(str(self.page_num))
+        # self.skip = count
+        # self.limit = count
+        products = _services.get_products(_database.SessionLocal())
+        products = _services.get_products_pages(_database.SessionLocal(),self.skip, self.limit)
+        from widgets.productWidget.ui_selling import ProductWidget
+        for i in (products[::-1]):
+            self.ui.verticalLayout_13.addWidget(
+                ProductWidget(i.id, i.name, i.size, i.color, i.num, i.price_in, i.price_out, "store", i.file_path))
+        self.vertical_spacer2 = QSpacerItem(20, 104, QSizePolicy.Minimum,
+                                            QSizePolicy.Expanding)
+        self.ui.verticalLayout_13.addItem(self.vertical_spacer2)
+        self.ui.nextPage.setVisible(True)
+        self.ui.PreviousPage.setVisible(True)
     #  /////////////////////////////////////////////////////////// SalesStore
     def searchInSalesStore(self):
         searchType = self.ui.color_sell_2.currentText()

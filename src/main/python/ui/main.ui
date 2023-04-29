@@ -1232,7 +1232,7 @@ border-top-left-radius: 20px;</string>
               <item>
                <widget class="QStackedWidget" name="stackedWidget_2">
                 <property name="currentIndex">
-                 <number>4</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="page_3">
                  <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -2305,7 +2305,7 @@ QComboBox QListView::item:selected{
                            </font>
                           </property>
                           <property name="text">
-                           <string>اختر المخزن</string>
+                           <string>اختر المخزن (اختياري)</string>
                           </property>
                          </widget>
                         </item>
@@ -2317,7 +2317,7 @@ QComboBox QListView::item:selected{
                            </font>
                           </property>
                           <property name="text">
-                           <string>اختر الفئة</string>
+                           <string>اختر الفئة (اختياري)</string>
                           </property>
                          </widget>
                         </item>
@@ -2380,7 +2380,7 @@ QComboBox QListView::item:selected{
                            </font>
                           </property>
                           <property name="text">
-                           <string>اختر فاتورة</string>
+                           <string>اختر فاتورة (اختياري)</string>
                           </property>
                          </widget>
                         </item>
@@ -3088,6 +3088,13 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                        </property>
                        <property name="text">
                         <string>&lt;&lt; Previous Page</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="page_num">
+                       <property name="text">
+                        <string/>
                        </property>
                       </widget>
                      </item>
@@ -3984,8 +3991,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>945</width>
-                                 <height>143</height>
+                                 <width>82</width>
+                                 <height>104</height>
                                 </rect>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -4203,8 +4210,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>945</width>
-                                 <height>142</height>
+                                 <width>82</width>
+                                 <height>104</height>
                                 </rect>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -4496,8 +4503,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>945</width>
-                                 <height>143</height>
+                                 <width>82</width>
+                                 <height>104</height>
                                 </rect>
                                </property>
                                <property name="styleSheet">
@@ -4764,8 +4771,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                    <rect>
                                     <x>0</x>
                                     <y>0</y>
-                                    <width>945</width>
-                                    <height>262</height>
+                                    <width>82</width>
+                                    <height>104</height>
                                    </rect>
                                   </property>
                                   <layout class="QVBoxLayout" name="verticalLayout_27"/>
@@ -5069,8 +5076,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                    <rect>
                                     <x>0</x>
                                     <y>0</y>
-                                    <width>945</width>
-                                    <height>262</height>
+                                    <width>82</width>
+                                    <height>104</height>
                                    </rect>
                                   </property>
                                   <property name="styleSheet">
@@ -5686,8 +5693,8 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
                                    <rect>
                                     <x>0</x>
                                     <y>0</y>
-                                    <width>945</width>
-                                    <height>542</height>
+                                    <width>18</width>
+                                    <height>58</height>
                                    </rect>
                                   </property>
                                   <layout class="QVBoxLayout" name="verticalLayout_33"/>
@@ -7615,7 +7622,7 @@ border-radius: 0px;
                     <item>
                      <widget class="QStackedWidget" name="stackedWidget_3">
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="page_7">
                        <layout class="QVBoxLayout" name="verticalLayout_38">
@@ -8010,6 +8017,99 @@ QPushButton:hover
                            </property>
                            <property name="text">
                             <string>قاعدة البيانات</string>
+                           </property>
+                          </widget>
+                          <widget class="QTextEdit" name="textEdit">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>170</y>
+                             <width>231</width>
+                             <height>81</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">QTextEdit{
+	color: rgb(0, 0, 0);
+border:2px solid transparent;
+border-radius: 8px;
+padding: 0px 8px;
+background-color: rgb(242, 248, 255);
+}
+QTextEdit::hover{
+
+	border: 2px solid rgb(103, 222, 255);
+}
+QTextEdit::focus{
+	border: 2px solid rgb(103, 222, 255);
+}</string>
+                           </property>
+                          </widget>
+                          <widget class="QLabel" name="label_34">
+                           <property name="geometry">
+                            <rect>
+                             <x>20</x>
+                             <y>140</y>
+                             <width>200</width>
+                             <height>20</height>
+                            </rect>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>11</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>انشاء رسالة </string>
+                           </property>
+                          </widget>
+                          <widget class="QPushButton" name="addToCart_4">
+                           <property name="geometry">
+                            <rect>
+                             <x>80</x>
+                             <y>260</y>
+                             <width>99</width>
+                             <height>40</height>
+                            </rect>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>99</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>200</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>14</pointsize>
+                            </font>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>PointingHandCursor</cursorShape>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">QPushButton
+{
+	border:0px;
+	color: rgb(230, 126, 34);
+	border: 2px solid  rgb(230, 126, 34);
+	border-radius:5px
+}
+QPushButton:hover
+{
+	border:0px;
+	background-color:rgb(230, 126, 34);
+	
+	color: #fff;
+}</string>
+                           </property>
+                           <property name="text">
+                            <string>تحديث</string>
                            </property>
                           </widget>
                          </widget>

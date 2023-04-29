@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainVllIIV.ui'
+## Form generated from reading UI file 'mainDbGjqO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit,
     QFrame, QGridLayout, QHBoxLayout, QLabel,
     QLineEdit, QMainWindow, QPushButton, QRadioButton,
     QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QVBoxLayout, QWidget)
+    QTextEdit, QVBoxLayout, QWidget)
 import resources_rc
 import resources_rc
 
@@ -1666,6 +1666,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_12.addWidget(self.PreviousPage)
 
+        self.page_num = QLabel(self.frame_39)
+        self.page_num.setObjectName(u"page_num")
+
+        self.horizontalLayout_12.addWidget(self.page_num)
+
         self.nextPage = QPushButton(self.frame_39)
         self.nextPage.setObjectName(u"nextPage")
         self.nextPage.setMinimumSize(QSize(0, 25))
@@ -2188,7 +2193,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 945, 143))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 82, 104))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.scrollArea_5.setWidget(self.scrollAreaWidgetContents_5)
@@ -2337,7 +2342,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 945, 142))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 82, 104))
         self.verticalLayout_19 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
         self.scrollArea_6.setWidget(self.scrollAreaWidgetContents_6)
@@ -2517,7 +2522,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 945, 143))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 82, 104))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
@@ -2682,7 +2687,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 945, 262))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 82, 104))
         self.verticalLayout_27 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.scrollArea_10.setWidget(self.scrollAreaWidgetContents_7)
@@ -2874,7 +2879,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 945, 262))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 82, 104))
         self.scrollAreaWidgetContents_11.setStyleSheet(u"")
         self.verticalLayout_29 = QVBoxLayout(self.scrollAreaWidgetContents_11)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
@@ -3233,7 +3238,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 945, 542))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 18, 58))
         self.verticalLayout_33 = QVBoxLayout(self.scrollAreaWidgetContents_12)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.scrollArea_12.setWidget(self.scrollAreaWidgetContents_12)
@@ -4500,6 +4505,48 @@ class Ui_MainWindow(object):
         self.label_88.setObjectName(u"label_88")
         self.label_88.setGeometry(QRect(110, 10, 101, 18))
         self.label_88.setFont(font4)
+        self.textEdit = QTextEdit(self.frame_83)
+        self.textEdit.setObjectName(u"textEdit")
+        self.textEdit.setGeometry(QRect(0, 170, 231, 81))
+        self.textEdit.setStyleSheet(u"QTextEdit{\n"
+"	color: rgb(0, 0, 0);\n"
+"border:2px solid transparent;\n"
+"border-radius: 8px;\n"
+"padding: 0px 8px;\n"
+"background-color: rgb(242, 248, 255);\n"
+"}\n"
+"QTextEdit::hover{\n"
+"\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}\n"
+"QTextEdit::focus{\n"
+"	border: 2px solid rgb(103, 222, 255);\n"
+"}")
+        self.label_34 = QLabel(self.frame_83)
+        self.label_34.setObjectName(u"label_34")
+        self.label_34.setGeometry(QRect(20, 140, 200, 20))
+        self.label_34.setFont(font3)
+        self.addToCart_4 = QPushButton(self.frame_83)
+        self.addToCart_4.setObjectName(u"addToCart_4")
+        self.addToCart_4.setGeometry(QRect(80, 260, 99, 40))
+        self.addToCart_4.setMinimumSize(QSize(99, 40))
+        self.addToCart_4.setMaximumSize(QSize(200, 16777215))
+        self.addToCart_4.setFont(font1)
+        self.addToCart_4.setCursor(QCursor(Qt.PointingHandCursor))
+        self.addToCart_4.setStyleSheet(u"QPushButton\n"
+"{\n"
+"	border:0px;\n"
+"	color: rgb(230, 126, 34);\n"
+"	border: 2px solid  rgb(230, 126, 34);\n"
+"	border-radius:5px\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"	border:0px;\n"
+"	background-color:rgb(230, 126, 34);\n"
+"	\n"
+"	color: #fff;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.frame_83, 0, 0, 1, 1)
 
@@ -4593,7 +4640,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.stackedWidget_2.setCurrentIndex(4)
+        self.stackedWidget_2.setCurrentIndex(1)
         self.stackedWidget_5.setCurrentIndex(2)
         self.stackedWidget_4.setCurrentIndex(0)
         self.stackedWidget_3.setCurrentIndex(0)
@@ -4639,9 +4686,9 @@ class Ui_MainWindow(object):
         self.clientname.setText("")
         self.done_sell.setText(QCoreApplication.translate("MainWindow", u"  \u0627\u062a\u0645\u0627\u0645 \u0627\u0644\u0639\u0645\u0644\u064a\u0629  ", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0639\u0627\u062f\u0629 \u0627\u062f\u062e\u0627\u0644", None))
-        self.c.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u062e\u0632\u0646", None))
-        self.label_32.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0627\u0644\u0641\u0626\u0629", None))
-        self.c_2.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0641\u0627\u062a\u0648\u0631\u0629", None))
+        self.c.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u062e\u0632\u0646 (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", None))
+        self.label_32.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0627\u0644\u0641\u0626\u0629 (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", None))
+        self.c_2.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0641\u0627\u062a\u0648\u0631\u0629 (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", None))
         self.enter_store.setText(QCoreApplication.translate("MainWindow", u"\u0628\u062d\u062b", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u0633\u0645", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"\u0633\u0639\u0631 \u0627\u0644\u0628\u064a\u0639 ", None))
@@ -4653,6 +4700,7 @@ class Ui_MainWindow(object):
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u0635\u0648\u0631\u0629", None))
         self.pushButton_14.setText("")
         self.PreviousPage.setText(QCoreApplication.translate("MainWindow", u"<< Previous Page", None))
+        self.page_num.setText("")
         self.nextPage.setText(QCoreApplication.translate("MainWindow", u"Next Page >>", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"\u0627\u062e\u062a\u0631 \u062e\u0627\u0646\u0629 \u0627\u0644\u0628\u062d\u062b", None))
         self.search.setText(QCoreApplication.translate("MainWindow", u"\u0628\u062d\u062b", None))
@@ -4744,6 +4792,8 @@ class Ui_MainWindow(object):
         self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"Download ", None))
         self.addToCart_3.setText(QCoreApplication.translate("MainWindow", u"Upload", None))
         self.label_88.setText(QCoreApplication.translate("MainWindow", u"\u0642\u0627\u0639\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a", None))
+        self.label_34.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0646\u0634\u0627\u0621 \u0631\u0633\u0627\u0644\u0629 ", None))
+        self.addToCart_4.setText(QCoreApplication.translate("MainWindow", u"\u062a\u062d\u062f\u064a\u062b", None))
         self.addToCart_2.setText(QCoreApplication.translate("MainWindow", u"\u062a\u0633\u062c\u064a\u0644 \u062e\u0631\u0648\u062c", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Created by MgA", None))
         self.feedback.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
