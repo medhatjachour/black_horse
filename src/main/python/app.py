@@ -366,26 +366,27 @@ class MainWindow(QMainWindow):
         self.ui.username_3.setFocus()
 
     def upload_fun(self):
-        from widgets.messageWidget.pyMessageBox import PyMessageBox
-        PyMessageBox(
-            323,
-            176,
-            " تنبيه",
-            " نسخ احتياطي ",
-            " سيتم استبدال ال داتا الموجودة علي السحابه ب احدث داتا الان",
-            "رفع",
-            "الغاء"
-        )
+        pass
+        # from widgets.messageWidget.pyMessageBox import PyMessageBox
+        # PyMessageBox(
+        #     323,
+        #     176,
+        #     " تنبيه",
+        #     " نسخ احتياطي ",
+        #     " سيتم استبدال ال داتا الموجودة علي السحابه ب احدث داتا الان",
+        #     "رفع",
+        #     "الغاء"
+        # )
 
-        if PyMessageBox.theStateOfTheMessaheBox(self):
+        # if PyMessageBox.theStateOfTheMessaheBox(self):
             
-            worker = Worker(
-                partial(
-                    self.start_uploading,
-                )
-            )
-            worker.signals.result.connect(partial(self.resultFunctionUploading))
-            self.threadpool.start(worker)
+        #     worker = Worker(
+        #         partial(
+        #             self.start_uploading,
+        #         )
+        #     )
+        #     worker.signals.result.connect(partial(self.resultFunctionUploading))
+        #     self.threadpool.start(worker)
     def start_uploading(self, progress_callback):
         path = app_context.get_resource('data/client_secret.json')
         upload_db(path)
@@ -394,26 +395,27 @@ class MainWindow(QMainWindow):
         self.ui.feedback.setStyleSheet(u"color: #10e205;")
 
     def download(self):
-        from widgets.messageWidget.pyMessageBox import PyMessageBox
-        PyMessageBox(
-            323,
-            176,
-            " تنبيه",
-            " استرجاع ",
-            " سيتم استبدال ال داتا الموجودة علي الجهاز ب احدث داتا موجودة علي السحابة",
-            "تحميل",
-            "الغاء"
-        )
+        pass
+        # from widgets.messageWidget.pyMessageBox import PyMessageBox
+        # PyMessageBox(
+        #     323,
+        #     176,
+        #     " تنبيه",
+        #     " استرجاع ",
+        #     " سيتم استبدال ال داتا الموجودة علي الجهاز ب احدث داتا موجودة علي السحابة",
+        #     "تحميل",
+        #     "الغاء"
+        # )
 
-        if PyMessageBox.theStateOfTheMessaheBox(self):
+        # if PyMessageBox.theStateOfTheMessaheBox(self):
             
-            worker = Worker(
-                partial(
-                    self.start_downloading,
-                )
-            )
-            worker.signals.result.connect(partial(self.resultFunctionDownloading))
-            self.threadpool.start(worker)
+        #     worker = Worker(
+        #         partial(
+        #             self.start_downloading,
+        #         )
+        #     )
+        #     worker.signals.result.connect(partial(self.resultFunctionDownloading))
+        #     self.threadpool.start(worker)
     def start_downloading(self,progress_callback):
         path = app_context.get_resource('data/client_secret.json')
         download_db(path)
