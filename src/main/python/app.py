@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget_2.setCurrentIndex(0)
         self.someInit()
         self.ui.stackedWidget_4.setCurrentIndex(0)
-        
+        self.currentWidgetIndex = 0
         # top par
         self.toggle_full_screen()
         self.ui.pushButton_3.clicked.connect(self.close_fun)
@@ -243,6 +243,53 @@ class MainWindow(QMainWindow):
         self.dragPos = event.globalPosition().toPoint()
         event.accept()
 
+    def keyPressEvent(self, event):
+        """
+        Forward keyPressEvents to plot as long as they are not used in MainApp.
+        """
+        if event.modifiers() == Qt.ControlModifier and event.key() == Qt.Key_Tab:
+            # self.ui.stackedWidget_2.setCurrentIndex(self.currentWidgetIndex)
+            match self.currentWidgetIndex :
+                case  0:
+                    self.currentWidgetIndex += 1
+                    self.set_status()
+                case  1:
+                    self.currentWidgetIndex += 1
+                    self.set_home()
+                case  2:
+                    self.currentWidgetIndex += 1
+                    self.set_store()
+                case  3:
+                    self.currentWidgetIndex += 1
+                    self.set_sales()
+                case  4:
+                    self.currentWidgetIndex = 0
+                    self.set_settings()
+                    # break
+            
+            #  self.currentWidgetIndex == 0:
+            #     self.currentWidgetIndex += 1
+            #     self.set_status()
+            #     break
+            # elif self.currentWidgetIndex == 1:
+            #     self.currentWidgetIndex += 1
+            #     self.set_settings()
+            #     break
+            # elif self.currentWidgetIndex == 2:
+            #     self.currentWidgetIndex += 1
+            #     self.set_home()
+            #     break
+            # elif self.currentWidgetIndex == 3:
+            #     self.currentWidgetIndex += 1
+            #     self.set_sales()
+            #     break
+            # elif self.currentWidgetIndex == 4:
+            #     self.currentWidgetIndex += 1
+            #     self.set_store()
+            #     break
+            # else:
+            #     self.currentWidgetIndex = 0
+    
     def close_fun(self):
         # from widgets.messageWidget.pyMessageBox import PyMessageBox
         # PyMessageBox(
@@ -462,10 +509,12 @@ class MainWindow(QMainWindow):
         self.ui.price_sell.setText("")
         product = self.ui.procut_sell.text()
         the_products = _services.get_products_by_name(_database.SessionLocal(), product)
+        
         if the_products:
             colors = []
             self.ui.size_sell.addItem("")
             for i in the_products:
+                # print(i.num)
                 if i.color in colors:
                     pass
                 else:
@@ -482,7 +531,7 @@ class MainWindow(QMainWindow):
             sizes = []
             self.ui.color_sell.addItem("")
             for i in the_products:
-                if i.size in sizes:
+                if i.size in sizes or int(i.num) <= 0:
                     pass
                 else:
                     sizes.append(i.size)
@@ -664,16 +713,16 @@ class MainWindow(QMainWindow):
             self.ui.feedback.setText("successfully completed sale")
             self.ui.feedback.setStyleSheet(u"color: #00946d;")
             if phone:
-                # pass
-                worker = Worker(
-                    partial(
-                        self.start_whatsapp,
-                        phone,
-                        name
-                    )
-                )
-                worker.signals.result.connect(partial(self.resultFunctionWhatsapp))
-                self.threadpool.start(worker)
+                pass
+                # worker = Worker(
+                #     partial(
+                #         self.start_whatsapp,
+                #         phone,
+                #         name
+                #     )
+                # )
+                # worker.signals.result.connect(partial(self.resultFunctionWhatsapp))
+                # self.threadpool.start(worker)
         else:
             self.ui.feedback.setText("please add items to cart")
             self.ui.feedback.setStyleSheet(u"color: #ff0000;")
@@ -1551,6 +1600,8 @@ class MainWindow(QMainWindow):
         self.ui.label_67.setText(f"{str(priceIn)} $")
         self.ui.label_74.setText(f"{str(output)} $")
         self.ui.label_21.setText(f"{str(real - output)}")
+        x = round(( ((total_in - priceIn)/ total_in) * 100),2) 
+        self.ui.label_78.setText(f"{str( x ) } %")
     
     def resultFunctionStatics(self, result):
         self.ui.pushButton_10.setEnabled(True)
@@ -1643,6 +1694,9 @@ class MainWindow(QMainWindow):
         self.ui.label_67.setText(f"{str(priceIn)} $")
         self.ui.label_74.setText(f"{str(output)} $")
         self.ui.label_21.setText(f"{str(real - output)}")
+    
+        x = round(( ((total_in - priceIn)/ total_in) * 100),2) 
+        self.ui.label_78.setText(f"{str( x ) } %")
     
     def resultFunctionCustomStatics(self, result):
         self.ui.pushButton_10.setEnabled(True)

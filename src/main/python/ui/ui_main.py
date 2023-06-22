@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainDbGjqO.ui'
+## Form generated from reading UI file 'mainhLgjhJ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -883,7 +883,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1023, 508))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_12 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_12.setSpacing(0)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
@@ -2193,7 +2193,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 82, 104))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.scrollArea_5.setWidget(self.scrollAreaWidgetContents_5)
@@ -2342,7 +2342,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 82, 104))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_19 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
         self.scrollArea_6.setWidget(self.scrollAreaWidgetContents_6)
@@ -2522,7 +2522,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 82, 104))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 100, 30))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
@@ -2687,7 +2687,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 82, 104))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_27 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.scrollArea_10.setWidget(self.scrollAreaWidgetContents_7)
@@ -2879,7 +2879,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 82, 104))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 100, 30))
         self.scrollAreaWidgetContents_11.setStyleSheet(u"")
         self.verticalLayout_29 = QVBoxLayout(self.scrollAreaWidgetContents_11)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
@@ -3238,7 +3238,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 18, 58))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 945, 542))
         self.verticalLayout_33 = QVBoxLayout(self.scrollAreaWidgetContents_12)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.scrollArea_12.setWidget(self.scrollAreaWidgetContents_12)
@@ -4141,7 +4141,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 64, 99))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_42 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_42.setObjectName(u"verticalLayout_42")
         self.scrollArea_8.setWidget(self.scrollAreaWidgetContents_9)
@@ -4353,7 +4353,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 214, 386))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_44 = QVBoxLayout(self.scrollAreaWidgetContents_10)
         self.verticalLayout_44.setObjectName(u"verticalLayout_44")
         self.scrollArea_9.setWidget(self.scrollAreaWidgetContents_10)
@@ -4640,10 +4640,10 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.stackedWidget_2.setCurrentIndex(1)
+        self.stackedWidget_2.setCurrentIndex(4)
         self.stackedWidget_5.setCurrentIndex(2)
         self.stackedWidget_4.setCurrentIndex(0)
-        self.stackedWidget_3.setCurrentIndex(0)
+        self.stackedWidget_3.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -4738,7 +4738,7 @@ class Ui_MainWindow(object):
         self.pushButton_15.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0639\u0627\u062f\u0629 \u0627\u062f\u062e\u0627\u0644", None))
         self.label_71.setText(QCoreApplication.translate("MainWindow", u"\u0635\u0627\u0641\u064a \u0627\u0644\u0631\u0628\u062d", None))
         self.label_78.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_72.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0645\u0643\u0633\u0628 \u0627\u0644\u0641\u0639\u0644\u064a", None))
+        self.label_72.setText(QCoreApplication.translate("MainWindow", u"\u0646\u0633\u0628\u0629 \u0627\u0644\u0645\u0643\u0633\u0628", None))
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_68.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0627\u062d\u0635\u0627\u0621\u0627\u062a", None))
         self.label_62.setText(QCoreApplication.translate("MainWindow", u"\u0627\u0644\u0628\u064a\u0639 \u0627\u0644\u0645\u062a\u0648\u0642\u0639", None))
