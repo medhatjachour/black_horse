@@ -42,7 +42,7 @@ Explore the features and functionalities.
 
 ## Contributing
 
-Contributions are welcome! If you’d like to contribute to this project, please follow the guidelines in the CONTRIBUTING.md file.
+Contributions are welcome! If you’d like to contribute to this project, just contact me
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
