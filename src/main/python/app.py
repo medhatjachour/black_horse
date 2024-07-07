@@ -1057,6 +1057,7 @@ class MainWindow(QMainWindow):
         self.ui.nextPage.setVisible(False)
         self.ui.PreviousPage.setVisible(False)
         # count = _services.get_products_count(_database.SessionLocal())
+        print(self.skip)
         self.skip = self.skip - 50
         if self.skip >  2 * self.limit:
             self.skip = self.skip - self.limit
@@ -1086,6 +1087,7 @@ class MainWindow(QMainWindow):
         self.ui.nextPage.setVisible(False)
         self.ui.PreviousPage.setVisible(False)
         # count = _services.get_products_count(_database.SessionLocal())
+        print(self.skip)
         self.skip = self.skip + 50
         if self.skip >  2 * self.limit:
             self.skip = self.skip - self.limit
@@ -1600,7 +1602,9 @@ class MainWindow(QMainWindow):
         self.ui.label_67.setText(f"{str(priceIn)} $")
         self.ui.label_74.setText(f"{str(output)} $")
         self.ui.label_21.setText(f"{str(real - output)}")
-        x = round(( ((total_in - priceIn)/ total_in) * 100),2) 
+        x = 0 
+        if total_in > 0:
+            x = round(( ((total_in - priceIn)/ total_in) * 100),2) 
         self.ui.label_78.setText(f"{str( x ) } %")
     
     def resultFunctionStatics(self, result):
@@ -1695,7 +1699,9 @@ class MainWindow(QMainWindow):
         self.ui.label_74.setText(f"{str(output)} $")
         self.ui.label_21.setText(f"{str(real - output)}")
     
-        x = round(( ((total_in - priceIn)/ total_in) * 100),2) 
+        x = 0 
+        if total_in > 0:
+            x = round(( ((total_in - priceIn)/ total_in) * 100),2) 
         self.ui.label_78.setText(f"{str( x ) } %")
     
     def resultFunctionCustomStatics(self, result):
