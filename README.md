@@ -17,6 +17,8 @@ Generate financial reports.
 Monitor overall project profitability.
 
 ![alt text](https://github.com/medhatjachour/black_horse/blob/main/sample/img.png?raw=true)
+![alt text](https://github.com/medhatjachour/black_horse/blob/main/sample/img2.png?raw=true)
+![alt text](https://github.com/medhatjachour/black_horse/blob/main/sample/img3.png?raw=true)
 ## Installation
 
 Clone this repository to your local machine.
