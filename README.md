@@ -29,13 +29,13 @@ Run the application using the provided script.
 git clone https://github.com/medhatjachour/black_horse.git
 cd black_horse
 pip install -r requirements.txt
-python main.py
+fbs run
 ```
 
 ## Usage
 ```
 Launch the application.
-Navigate through the different tabs (Sales, Inventory, Finance).
+Navigate through the different tabs (Sales, Store, Finance).
 Add, edit, or delete records as needed.
 Explore the features and functionalities.
 ```
