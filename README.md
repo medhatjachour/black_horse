@@ -15,7 +15,8 @@ Financial Operations:
 Record income and expenses.
 Generate financial reports.
 Monitor overall project profitability.
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
+
+![alt text](https://github.com/medhatjachour/black_horse/blob/main/sample/img.png?raw=true)
 ## Installation
 
 Clone this repository to your local machine.
