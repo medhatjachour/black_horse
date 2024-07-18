@@ -3,18 +3,18 @@
 This management system is designed to handle sales, inventory, and financial operations for small projects. It provides an intuitive user interface for managing various aspects of project management.
 
 ## Features
-Sales Management:
-Record sales transactions.
-View sales history.
-Monitor sales performance.
-Inventory Management:
-Add new products to the inventory.
-Track stock levels.
-Receive alerts for low stock.
-Financial Operations:
-Record income and expenses.
-Generate financial reports.
-Monitor overall project profitability.
+  . Sales Management:
+  . Record sales transactions.
+  . View sales history.
+  . Monitor sales performance.
+  . Inventory Management:
+  . Add new products to the inventory.
+  . Track stock levels.
+  . Receive alerts for low stock.
+  . Financial Operations:
+  . Record income and expenses.
+  . Generate financial reports.
+  . Monitor overall project profitability.
 
 ![alt text](https://github.com/medhatjachour/black_horse/blob/main/sample/img.png?raw=true)
 ![alt text](https://github.com/medhatjachour/black_horse/blob/main/sample/img2.png?raw=true)
